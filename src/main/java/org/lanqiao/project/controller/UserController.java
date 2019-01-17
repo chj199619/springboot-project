@@ -21,7 +21,7 @@ public class UserController {
 ////        return "userlist";
 ////    }
     @RequestMapping("ad-index")
-    public String index(Model model){
+    public String adindex(Model model){
 
         return "ad-index";
     }
@@ -38,6 +38,27 @@ public class UserController {
     }
 
 
+
+
+//    前端
+
+    @RequestMapping("index")
+    public String index(Model model){
+        model.addAttribute("msg","Hello Thymeleaf");
+        return "index";
+    }
+    @RequestMapping("login")
+    public String login(Model model){
+        return "login";
+    }
+    @RequestMapping("register")
+    public String register(Model model){
+        return "register";
+    }
+    @RequestMapping("cart")
+    public String cart(Model model){
+        return "cart";
+    }
 
 
 
