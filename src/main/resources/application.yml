@@ -5,5 +5,7 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
+#配置mybatis资源文件位置
+
 
 

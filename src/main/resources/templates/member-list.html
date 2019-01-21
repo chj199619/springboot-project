@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  
+
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
   <head>
     <meta charset="UTF-8">
     <title>电脑网上商城后台管理</title>
@@ -10,14 +12,20 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/xadmin.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="./js/xadmin.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/xcity.js"></script>
+
+
+
+
   </head>
   
   <body class="layui-anim layui-anim-up">
@@ -34,24 +42,21 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <input class="layui-input" placeholder="开始日" name="start" id="start">
-          <input class="layui-input" placeholder="截止日" name="end" id="end">
           <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
           <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         </form>
       </div>
       <xblock>
-        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：条</span>
+        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
+        <button class="layui-btn"  ><i class="layui-icon"></i>添加</button>
+
+        <span class="x-right" style="line-height:40px">共有：<a th:text="${size}"></a>条数据</span>
+
       </xblock>
       <table class="layui-table">
+        <!--<input type="hidden" name="currentPage" id="currentPage" value="${currentPage}">-->
         <thead>
           <tr>
-            <th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>
-
             <th>ID</th>
             <th>用户名</th>
             <th>昵称</th>
@@ -59,14 +64,11 @@
             <th>电话</th>
             <th>邮箱</th>
             <th>注册时间</th>
-            <th>状态</th>
+            <th>收获地址</th>
             <th>操作</th></tr>
         </thead>
         <tbody>
-          <tr th:each="user:${userlist}">
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
+          <tr th:each="user:${userlist}" >
             <td>[[${user.u_id}]]</td>
             <td>[[${user.u_name}]]</td>
             <td>[[${user.u_nickname}]]</td>
@@ -75,105 +77,164 @@
             <td>[[${user.u_phone}]]</td>
             <td>[[${user.u_email}]]</td>
             <td>[[${user.u_hiredate}]]</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
+            <td>[[${user.u_address}]]</td>
             <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
               <a title="编辑"  onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
                 <i class="layui-icon">&#xe642;</i>
               </a>
               <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
                 <i class="layui-icon">&#xe631;</i>
               </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
+              <a title="删除" class="delete" onclick="member_del(this,'[[${user.u_user}]]')" th:href="@{/delete(u_id=${user.u_id})}" >
+                  <i class="layui-icon">&#xe640;</i>
               </a>
+
             </td>
+
           </tr>
 
         </tbody>
       </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
-
     </div>
+    <!--模态款-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addEmpModel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="gridSystemModalLabel">新增</h4>
+          </div>
+          <div class="modal-body">
+            <form method="post" action="#" id="addForm" class="layui-form layui-col-md12  layui-form-pane">
+              <input hidden id="mark" value="add"/>
+              <div class="form-group hidden">
+                <label for="u_id" class="control-label">用户编号:</label>
+                <input type="text" class="form-control" id="u_id" name="u_id">
+              </div>
+              <div class="form-group">
+                <label for="u_name" class="control-label">用户名:</label>
+                <input type="text" class="form-control" id="u_name" name="u_name" required>
+              </div>
+              <div class="form-group">
+                <label for="u_nickname" class="control-label">昵称:</label>
+                <input type="text" class="form-control" id="u_nickname" name="u_nickname" required>
+              </div>
+              <div class="form-group">
+                <label for="mgr" class="control-label">密码:</label>
+                <input type="text" class="form-control" id="mgr" name="mgr" required>
+              </div>
+              <div class="form-group">
+                <label for="u_phone" class="control-label">电话:</label>
+                <input type="text" class="form-control" id="u_phone" name="u_phone" required>
+              </div>
+              <div class="form-group">
+                <label for="u_email" class="control-label">邮箱:</label>
+                <input type="text" class="form-control" id="u_email" name="u_email" required>
+              </div>
+                <label class="control-label">收货地址:</label>
+              <div class="layui-form-item" id="x-city">
+                <!--<label class="layui-form-label">城市联动</label>-->
+                <div class="layui-input-inline">
+                  <select name="province" lay-filter="province">
+                    <option value="">请选择省</option>
+                  </select>
+                </div>
+                <div class="layui-input-inline">
+                  <select name="city" lay-filter="city">
+                    <option value="">请选择市</option>
+                  </select>
+                </div>
+                <div class="layui-input-inline">
+                  <select name="area" lay-filter="area">
+                    <option value="">请选择县/区</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="u_address" class="control-label">详细地址:</label>
+                <input type="text" class="form-control" id="u_address" name="u_address" required>
+              </div>
+
+            </form>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="save">保存</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--<div class="x-body">-->
+      <!--<div class="layui-row">-->
+        <!--<form class="layui-form layui-col-md12  layui-form-pane">-->
+          <!--<div class="layui-form-item" id="x-city">-->
+            <!--<label class="layui-form-label">城市联动</label>-->
+            <!--<div class="layui-input-inline">-->
+              <!--<select name="province" lay-filter="province">-->
+                <!--<option value="">请选择省</option>-->
+              <!--</select>-->
+            <!--</div>-->
+            <!--<div class="layui-input-inline">-->
+              <!--<select name="city" lay-filter="city">-->
+                <!--<option value="">请选择市</option>-->
+              <!--</select>-->
+            <!--</div>-->
+            <!--<div class="layui-input-inline">-->
+              <!--<select name="area" lay-filter="area">-->
+                <!--<option value="">请选择县/区</option>-->
+              <!--</select>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</form>-->
+      <!--</div>-->
+
+    <!--</div>-->
     <script>
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
+        layui.use(['form','code'], function(){
+            form = layui.form;
+
+            layui.code();
+
+            $('#x-city').xcity('广东','广州市','东山区');
+
         });
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
 
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#start' //指定元素
+            });
+
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#end' //指定元素
+            });
         });
-      });
+        $(".delete").click(function () {
+            var isDelete = confirm ("确定删除吗？");
+            if(isDelete){
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
+            }else{
+                return false;
+            }
+        })
 
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
-          });
-      }
+        $(".layui-btn").click(function () {
+            $('#addEmpModel').modal({
+                show:true
+            })
+        })
 
 
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
     </script>
-    <script>var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();</script>
+
+
+
+
+
+
   </body>
 
 </html>

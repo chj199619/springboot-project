@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   
   <head>
     <meta charset="UTF-8">
@@ -61,16 +61,16 @@
             <th>操作</th>
         </thead>
         <tbody>
-          <tr>
+          <tr th:each="manager:${managerList}">
             <td>
               <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
             </td>
-            <td>1</td>
-            <td>admin</td>
-            <td>18925139194</td>
-            <td>113664000@qq.com</td>
-            <td>超级管理员</td>
-            <td>2017-01-01 11:11:42</td>
+            <td>[[${manager.id}]]</td>
+            <td>[[${manager.username}]]</td>
+            <td>[[${manager.phone}]]</td>
+            <td>[[${manager.email}]]</td>
+            <td>[[${manager.role}]]</td>
+            <td>[[${manager.jointime}]]</td>
             <td class="td-status">
               <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
             <td class="td-manage">

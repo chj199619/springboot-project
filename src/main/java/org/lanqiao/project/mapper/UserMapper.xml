@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.project.mapper.UserMapper">
+    <select id="getAll" resultType="org.lanqiao.project.pojo.User" parameterType="org.lanqiao.project.pojo.Condition">
+        select * from  user
+        <where>
+            <if test="u_id != null &amp;&amp; u_id != 0">
+                and u_id = #{u_id}
+            </if>
+            <if test="u_name != null &amp;&amp; u_name != ''">
+                and  u_name like concat ('%', #{u_name}, '%')
+            </if>
+            <if test="u_nickname != null &amp;&amp; u_nickname != ''">
+                and  u_nickname like concat ('%', #{u_nickname}, '%')
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getUserCount" parameterType="org.lanqiao.project.pojo.Condition" resultType="int">
+        select count(1) from  user
+        <where>
+            <if test="u_id != null &amp;&amp; u_id != 0">
+                and u_id = #{u_id}
+            </if>
+            <if test="u_name != null &amp;&amp; u_name != ''">
+                and  u_name like concat ('%', #{u_name}, '%')
+            </if>
+            <if test="u_nickname != null &amp;&amp; u_nickname != ''">
+                and  u_nickname like concat ('%', #{u_nickname}, '%')
+            </if>
+        </where>
+    </select>
+    <delete id="deleteUser" parameterType="int">
+        delete from user where u_id = #{u_id}
+    </delete>
+    <!--<update id="updateUser" parameterType="org.lanqiao.project.pojo.User">-->
+        <!--update user set u_name = #{u_name},u_nickname = #{u_nickname},u_password = #{u_password},u_phone = #{u_phone},u_email = #{u_email},province = #{province},city = #{city},area = #{area},u_address = #{u_address} where u_id = #{u_id}-->
+    <!--</update>-->
+
+
+</mapper>

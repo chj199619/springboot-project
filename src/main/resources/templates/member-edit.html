@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   
   <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
   
   <body>
     <div class="x-body">
-        <form class="layui-form">
+        <form class="layui-form" th:action="@{member-add}" method="post">
             <div class="layui-form-item">
                 <label for="L_username" class="layui-form-label">
                     <span class="x-red">*</span>用户名
@@ -37,7 +37,7 @@
                     <span class="x-red">*</span>昵称
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="L_username" name="username" required="" lay-verify="nikename"
+                    <input type="text" id="L_username" name="username2" required="" lay-verify="nikename"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
@@ -79,7 +79,7 @@
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
               </label>
-              <button  class="layui-btn" lay-filter="add" lay-submit="">
+              <button  class="layui-btn" lay-filter="add" lay-submit="" type="submit">
                   增加
               </button>
           </div>
@@ -93,12 +93,12 @@
       
         //自定义验证规则
         form.verify({
-          nikename: function(value){
-            if(value.length < 5){
-              return '昵称至少得5个字符啊';
-            }
-          }
-          ,pass: [/(.+){6,12}$/, '密码必须6到12位']
+          // nikename: function(value){
+          //   if(value.length < 5){
+          //     return '昵称至少得5个字符啊';
+          //   }
+          // },
+          pass: [/(.+){6,12}$/, '密码必须6到12位']
           ,repass: function(value){
               if($('#L_pass').val()!=$('#L_repass').val()){
                   return '两次密码不一致';
