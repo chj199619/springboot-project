@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+</head>
+<body>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>商品编号</th>
+        <th>商品图片</th>
+        <th>商品名称</th>
+        <th>商品价格</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!--遍历购物车列表-->
+    <tr th:each="paper:${papers}">
+        <td th:text="${paper.c_num}"></td>
+        <td><img  style="width: 45px;height: 45px" th:src="${paper.g_img}"></td>
+        <td th:text="${paper.g_name}"></td>
+        <td th:text="${paper.c_price}"></td>
+    </tr>
+    </tbody>
+</table>
+<a style="float: right; margin-right: 270px;font-size: larger;text-decoration: none; color: blue" th:href="@{/findcon(condition= 全部订单)}">返回</a>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.project.mapper.RateadminMapper">
+    <select id="getAll" resultType="org.lanqiao.project.pojo.Rate" parameterType="org.lanqiao.project.pojo.Condition">
+        select * from  rate
+        <where>
+            <if test="u_id != null &amp;&amp; u_id != 0">
+                and u_id = #{u_id}
+            </if>
+            <if test="o_id != null &amp;&amp; o_id != 0">
+                and o_id = #{o_id}
+            </if>
+            <if test="g_name != null &amp;&amp; g_name != ''">
+                and  g_name like concat ('%', #{g_name}, '%')
+            </if>
+            <if test="t_type != null &amp;&amp; t_type != ''">
+                and  t_type like concat ('%', #{t_type}, '%')
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getRateCount" parameterType="org.lanqiao.project.pojo.Condition" resultType="int">
+        select count(1) from  rate
+        <where>
+            <if test="u_id != null &amp;&amp; u_id != 0">
+                and u_id = #{u_id}
+            </if>
+            <if test="o_id != null &amp;&amp; o_id != 0">
+                and o_id = #{o_id}
+            </if>
+            <if test="g_name != null &amp;&amp; g_name != ''">
+                and  g_name like concat ('%', #{g_name}, '%')
+            </if>
+            <if test="t_type != null &amp;&amp; t_type != ''">
+                and  t_type like concat ('%', #{t_type}, '%')
+            </if>
+        </where>
+    </select>
+    <delete id="deleteRate" parameterType="int">
+      delete from rate where rate_id=#{rate_id}
+
+    </delete>
+
+
+
+
+</mapper>

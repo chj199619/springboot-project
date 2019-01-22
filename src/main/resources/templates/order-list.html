@@ -53,11 +53,11 @@
       <table class="layui-table">
         <thead>
           <tr>
-            <th>ID</th>
             <th class="removeit" >订单编号</th>
             <th>收货人</th>
             <th>总金额</th>
             <th>应付金额</th>
+            <th>查看详情</th>
             <th>订单状态</th>
             <th>快递公司</th>
             <th >操作</th>
@@ -65,12 +65,14 @@
         </thead>
         <tbody>
         <tr th:each="paper:${papers}">
-            <td th:text="${paper.id}"></td>
+            <td th:text="${paper.id}" hidden="hidden"></td>
             <td th:text="${paper.ddid}"></td>
             <td th:text="${paper.name}"></td>
             <td th:text="${paper.orgp}"></td>
             <td th:text="${paper.lastp}"></td>
+            <td><a th:href="@{'/detail?ddid='+${paper.ddid}+'&uid='+${paper.u_id}}">查看</a></td>
             <td th:text="${paper.pscondition}"></td>
+            <td th:text="${paper.u_id}" hidden="hidden"></td>
             <td th:text="${paper.kuaidi}"></td>
             <td  class="td-manage">
               <a title="查看" class="update" ><!--onclick="member_update()" -->
@@ -83,16 +85,6 @@
           </tr>
         </tbody>
       </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
 
       <!--模态框-->
       <div class="modal fade" tabindex="-1" id="addModal" role="dialog" aria-labelledby="gridSystemModalLabel">
@@ -157,7 +149,6 @@
       //     var condition = $('select  option:selected').text();
       //     alert(condition)
       // }
-
       //订单删除
       function foo(){
           if(confirm("确认删除吗？")){
@@ -167,6 +158,10 @@
           return false;
       }
 
+      $(".aa").click(function () {
+          window.open('detail','','height=100,width=400,top=0,left=0,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no')
+      })
+
       /*订单-修改*/
       $(".update").click(function () {
           var id    = $(this).parent().parent().children('td:eq(0)').text();
@@ -174,16 +169,17 @@
           var name  = $(this).parent().parent().children('td:eq(2)').text();
           var orgp  = $(this).parent().parent().children('td:eq(3)').text();
           var lastp = $(this).parent().parent().children('td:eq(4)').text();
-          var condition = $(this).parent().parent().children('td:eq(5)').text();
-          var kuaidi= $(this).parent().parent().children('td:eq(6)').text();
+          var condition = $(this).parent().parent().children('td:eq(6)').text();
+          var kuaidi= $(this).parent().parent().children('td:eq(7)').text();
           //遍历condition
           $("#pscondition option").remove();
           $.ajax({
               url: "/condition",
+              data:{"condition":condition},
               success: function (data) {
                   var conditions = eval(data);
                   $.each(conditions, function (index, obj) {
-                      $("#pscondition").append("<option>" + obj.name + "</option>")
+                      $("#pscondition").append("<option>" + obj + "</option>")
                   });
                   $('#addModal').modal({
                       show: true//模态框显示
@@ -198,7 +194,6 @@
                   success:function (data) {
                       $.each(data,function (name,value) {
                           if (name == "paper") {//name是map的键，value值是map的值
-                              alert(value.pscondition)
                               $("#id").val(value.id);
                               $("#ddid").val(value.ddid);
                               $("#name").val(value.name);

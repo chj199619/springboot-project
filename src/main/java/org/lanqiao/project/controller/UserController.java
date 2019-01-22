@@ -2,7 +2,6 @@ package org.lanqiao.project.controller;
 
 
 import com.alibaba.fastjson.JSON;
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.lanqiao.project.pojo.Condition;
 import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.service.UserService;
@@ -12,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -35,7 +31,6 @@ public class UserController {
     public String index(Model model){
         return "ad-index";
     }
-
     @RequestMapping("member-list.html")
     public String queryAll(Model model){
         List<User>userList=userService.selectAll();
@@ -53,13 +48,11 @@ public String getUserList(HttpServletRequest request,Model model){
     }
     Condition condition = Condition.builder().build();
     Object u_id = request.getParameter("searchu_id");
-//    System.out.println(u_id.toString()+"11112222222222222222222222222222222");
     if(!StringUtils.isEmpty(u_id) && Integer.valueOf(u_id.toString()) != 0){
         condition.setU_id(Integer.valueOf(u_id.toString()));
     }
 
     Object u_name= request.getParameter("searchu_name");
-    System.out.println(u_name+"searchu_name00000000000000000000");
     if(!StringUtils.isEmpty(u_name)){
         condition.setU_name(u_name.toString());
     }
@@ -69,9 +62,8 @@ public String getUserList(HttpServletRequest request,Model model){
     }
     int totalRecords = userService.getUserCount(condition);
     PageModel pm = new PageModel(pageNum,totalRecords,pageSize);
-
         //如果当前页大于总页数，但是排除查询不到数据的情况。当前页等于最大页
-        if(pageNum > pm.getTotalPageNum() && pm.getTotalPageNum() != 0){
+    if(pageNum > pm.getTotalPageNum() && pm.getTotalPageNum() !=0){
             pageNum = pm.getTotalPageNum();
     }
     PageModel pageModel = new PageModel(pageNum,totalRecords,pageSize);
@@ -90,16 +82,7 @@ public String getUserList(HttpServletRequest request,Model model){
     model.addAttribute("size",size);
     return "member-list2";
 }
-   //修改用户
-    @RequestMapping("member-edit.html")
-    public String edit(Model model, HttpServletRequest request){
-        return "member-edit";
-    }
 
-    @RequestMapping("member-add.html")
-    public String insert(Model model, HttpServletRequest request){
-        return "member-add";
-    }
     //新增用户
     @RequestMapping("adduser")
     public String adduser(Model model,HttpServletRequest request)  {

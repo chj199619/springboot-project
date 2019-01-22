@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.project.mapper.ComputerAdminMapper">
+    <select id="getAll" resultType="org.lanqiao.project.pojo.Goodscomput" parameterType="org.lanqiao.project.pojo.Condition">
+        select * from  goodscomput
+        <where>
+            <if test="g_id != null &amp;&amp; g_id != 0">
+                and g_id = #{g_id}
+            </if>
+            <if test="g_name != null &amp;&amp; g_name != ''">
+                and  g_name like concat ('%', #{g_name}, '%')
+            </if>
+            <if test="t_type != null &amp;&amp; t_type != ''">
+                and  t_type like concat ('%', #{t_type}, '%')
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getComputerCount" parameterType="org.lanqiao.project.pojo.Condition" resultType="int">
+        select count(1) from  goodscomput
+        <where>
+            <if test="g_id != null &amp;&amp; g_id != 0">
+                and g_id = #{g_id}
+            </if>
+            <if test="g_name != null &amp;&amp; g_name != ''">
+                and  g_name like concat ('%', #{g_name}, '%')
+            </if>
+            <if test="t_type != null &amp;&amp; t_type != ''">
+                and  t_type like concat ('%', #{t_type}, '%')
+            </if>
+        </where>
+    </select>
+    <delete id="deletegoodscomput" parameterType="int">
+        delete from goodscomput where g_id = #{g_id}
+    </delete>
+    <update id="updatePrice" parameterType="org.lanqiao.project.pojo.Goodscomput">
+        update goodscomput set g_price = #{g_price},g_oriprice = #{g_oriprice} where g_id = #{g_id}
+    </update>
+
+
+
+
+</mapper>

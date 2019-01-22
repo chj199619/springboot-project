@@ -15,4 +15,8 @@ public class Condition {
     private String u_nickname;
     private Integer currentPage;
     private Integer pageSize;
+    private String g_name;
+    private Integer o_id;
+    private Integer g_id;
+    private String t_type;
 }

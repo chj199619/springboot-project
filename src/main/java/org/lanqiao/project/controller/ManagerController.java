@@ -1,8 +1,6 @@
 package org.lanqiao.project.controller;
 
-import org.apache.ibatis.annotations.Select;
 import org.lanqiao.project.pojo.Manager;
-import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

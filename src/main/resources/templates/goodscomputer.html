@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--<%@ page contentType="text/html;charset=UTF-8" language="java" %>-->
+<!--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>-->
+<head>
+    <meta charset="UTF-8">
+    <title>电脑网上商城后台管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/font.css">
+    <link rel="stylesheet" href="./css/xadmin.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/js/jquery.min.js" ></script>
+    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="./js/xadmin.js"></script>
+    <script type="text/javascript" src="./js/xcity.js"></script>
+    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <script>
+        function search(currentPage) {
+            var searchg_id = $("#searchg_id").val();
+            var searchg_name = $("#searchg_name").val();
+            var searcht_type = $("#searcht_type").val();
+            if(currentPage == null){
+                var currentPage = $("#currentPage").val();
+            }else{
+                var currentPage = currentPage;
+            }
+            var url = "/goodscomputerlist.do?currentPage="+currentPage+"&searchg_id="+searchg_id+"&searchg_name="+searchg_name+"&searcht_type="+searcht_type;
+            window.location.href = url;
+            // $(".layui-show").load(url)
+        };
+        $(function () {
+            //删除用户
+            $(".delete").click(function () {
+                var isDelete = confirm ("确定删除吗？");
+                if(isDelete){
+                    var id = $(this).parent().parent().children("td:eq(0)").text();
+                    //查询条件
+                    var searchg_id = $("#searchg_id").val();
+                    var searchg_name = $("#searchg_name").val();
+                    var searcht_type = $("#searcht_type").val();
+                    var currentPage = $("#currentPage").val();
+                    var url = "/deletegoodcomput?g_id=" + id + "&searchg_id=" + searchg_id +  "&searchg_name=" + searchg_name + "&searcht_type=" + searcht_type+"&currentPage=" + currentPage;
+                    window.location.href = url;
+                }else{
+                    return;
+                }
+            });
+            //新增模态框
+            $("#layui-btn").click(function () {
+                $("#id").val("");
+                $("#usenanme").val("");
+                $("#nickname").val("");
+                $("#password").val("");
+                $("#email").val("");
+                $("#tel").val("");
+                $("#province").val("");
+                $("#city").val("");
+                $("#area").val("");
+                $("#address").val("");
+                $('#addEmpModel').modal({
+                    show:true
+                })
+            });
+            $(".updatekucun").click(function () {
+                var id = $(this).parent().parent().children("td:eq(0)").text();
+                alert(id)
+                $.ajax({
+                    url:"/selectGoods?g_id=" + id,
+                    success:function (data) {
+                        var goodscomput = eval(data);
+                        $("#id2").val(goodscomput.g_id);
+                        $("#username2").val(goodscomput.g_name);
+                        $("#username2").attr("readonly", "readonly");
+                        $("#kucun").val(goodscomput.g_num);
+                        // $("#originpassword").val(user.u_password);
+                    }
+                })
+                $('#addEmpModel2').modal({
+                    show:true
+                })
+
+            })
+            $(".updatePrice").click(function () {
+                var id = $(this).parent().parent().children("td:eq(0)").text();
+                alert(id)
+                $.ajax({
+                    url:"/selectGoods?g_id=" + id,
+                    success:function (data) {
+                        var goodscomput = eval(data);
+                        $("#id3").val(goodscomput.g_id);
+                        $("#username3").val(goodscomput.g_name);
+                        $("#username3").attr("readonly", "readonly");
+                        $("#g_oriprice").val(goodscomput.g_oriprice);
+                        $("#g_price").val(goodscomput.g_price);
+                    }
+                })
+                $('#addEmpModel3').modal({
+                    show:true
+                })
+            })
+        })
+    </script>
+</head>
+<body class="layui-anim layui-anim-up">
+<input type="hidden" name="currentPage" id="currentPage" th:value="${currentPage}">
+<div class="x-nav">
+      <span class="layui-breadcrumb">
+        <a href="">首页</a>
+        <a href="">演示</a>
+        <a>
+          <cite>导航元素</cite></a>
+      </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon" style="line-height:30px">ဂ</i></a>
+</div>
+<div class="x-body">
+    <div class="layui-row">
+        <form class="layui-form layui-col-md12 x-so">
+            <input type="text" name="searchg_id"   id="searchg_id" placeholder="请输入商品编号" autocomplete="off" class="layui-input" th:value="${condition.g_id}">
+            <input type="text" name="searcht_type" id="searcht_type"  placeholder="请输入商品品牌" autocomplete="off" class="layui-input" th:value="${condition.t_type}">
+            <input type="text" name="searchg_name" id="searchg_name" placeholder="请输入商品名称" autocomplete="off" class="layui-input" th:value="${condition.g_name}">
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+
+        </form>
+
+    </div>
+    <xblock>
+
+        <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>-->
+        <button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>上架商品</button>
+        <button class="layui-btn" id="layui-btn2"><a href="/goodscomputerlist.do" style="text-decoration-line: none;color: white">重置</a></button>
+
+
+    </xblock>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th style="font-size: 10px">商品编号</th>
+            <th style="font-size: 10px">图片</th>
+            <th style="font-size: 10px">商品名称</th>
+            <th style="font-size: 10px">商品详情</th>
+            <th style="font-size: 10px">价格</th>
+            <th style="font-size: 10px">原价</th>
+            <th style="font-size: 10px">内存</th>
+            <th style="font-size: 10px">颜色</th>
+            <th style="font-size: 10px">商品品牌</th>
+            <th style="font-size: 10px">库存</th>
+            <th style="font-size: 10px">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="goodscomputer:${goodscomputList}" >
+            <td style="font-size: 10px">[[${goodscomputer.g_id}]]</td>
+            <td style="font-size: 10px"><img th:src="${goodscomputer.g_img}"></td>
+            <td style="font-size: 10px">[[${goodscomputer.g_name}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.g_xiangqing}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.g_price}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.g_oriprice}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.g_neicun}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.g_color}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.t_type}]]</td>
+            <td style="font-size: 10px">[[${goodscomputer.g_num}]]</td>
+            <td class="td-manage">
+                <a  title="修改单价" class="updatePrice" >
+                    <i class="layui-icon">&#xe631;</i>
+                </a>
+                <a  title="修改库存" class="updatekucun" >
+                    <i class="layui-icon">&#xe6b2;</i>
+                </a>
+
+                <a title="下架商品" class="delete"   >
+                    <i class="layui-icon">&#xe640;</i>
+                </a>
+
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+    <!--分页插件-->
+    <center th:if="${goodscomputList.size()!=0}">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li  th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>
+                <li  th:onclick="search([[${pm.prePageNum}]])">
+                    <a href="javascript:void(0);"  aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li th:each="i : ${#numbers.sequence(1,pm.totalPageNum)}" th:onclick="search([[${i}]])">
+                    <a href="javascript:void(0);">
+                        <span th:if="${i==pm.currentPageNum}" style = 'color:red;'>[[${i}]]</span>
+                        <span th:if="${i!=pm.currentPageNum}">[[${i}]]</span>
+                    </a>
+                </li>
+                <li th:onclick="search([[${pm.nextPageNum}]])">
+                    <a href="javascript:void(0);"  aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li th:onclick="search([[${pm.endPage}]])"><a href="javascript:void(0);"><span>尾页</span></a></li>
+            </ul>
+        </nav>
+    </center>
+    <!--模态款-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addEmpModel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="gridSystemModalLabel">上架新品</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="addForm" action="addgoodscomput"  method="post" class="layui-form layui-col-md12  layui-form-pane">
+                        <!--<input hidden id="mark" value="add"/>-->
+                        <div class="form-group hidden">
+                            <label for="id" class="control-label">用户编号:</label>
+                            <input type="text" class="form-control" id="id" name="id">
+                        </div>
+                        <div class="form-group">
+                            <label for="goodsname" class="control-label">商品名称:</label>
+                            <input type="text" class="form-control" id="goodsname" name="goodsname" >
+                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<label for="goodsxq" class="control-label">商品详情:</label>-->
+                            <!--<input type="text" class="form-control" id="goodsxq" name="goodsxq" >-->
+                        <!--</div>-->
+                        <div class="form-group">
+                            <label for="price" class="control-label">价格:</label>
+                            <input type="text" class="form-control" id="price" name="price">
+                        </div>
+                        <div class="form-group">
+                            <label for="oriprice" class="control-label">原价:</label>
+                            <input type="text" class="form-control" id="oriprice" name="oriprice" >
+                        </div>
+                        <div class="form-group">
+                            <label for="color" class="control-label">颜色:</label>
+                            <input type="text" class="form-control" id="color" name="color" >
+                        </div>
+                        <div class="form-group">
+                            <label for="t_type" class="control-label">商品品牌:</label>
+                            <input type="text" class="form-control" id="t_type" name="t_type" >
+                        </div>
+                        <div class="form-group">
+                            <label for="g_num" class="control-label">库存:</label>
+                            <input type="text" class="form-control" id="g_num" name="g_num" >
+                        </div>
+                        <label class="control-label">商品详情:</label>
+                        <div class="layui-form-item" >
+                            <div class="layui-input-inline">
+                                <select th:name="condition1">
+                                    <option value="">请选择系统</option>
+                                    <option >系统：Windows 10</option>
+                                    <option >系统：Windows 7</option>
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select th:name="condition2">
+                                    <option value="">请选择处理器</option>
+                                    <option>英特尔酷睿I7-8750U</option>
+                                    <option >英特尔酷睿I7-8750U</option>
+                                    <option >英特尔酷睿I7-8650U</option>
+                                    <option >英特尔酷睿I5-8650U</option>
+                                    <option >英特尔酷睿I3-8750U</option>
+
+                                </select>
+                            </div>
+                            <div class="layui-input-inline">
+                                <select th:name="condition3">
+                                    <option value="">请选择显卡类别</option>
+                                    <option >显卡型号：GTX1060Ti</option>
+                                    <option >显卡型号：GTX1050Ti</option>
+                                    <option>显卡型号：GTX1070Ti</option>
+                                    <option >显卡类别：集成显卡</option>
+                                    <option >显卡类别：入门级游戏独立显卡</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">运行内存:</label>
+                            <!--<input type="text" class="form-control" id="neicun" name="neicun" >-->
+                            <select th:name="condition4">
+                                <option >4G</option>
+                                <option >8G</option>
+                                <option >16G</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label  class="control-label">上传图片:</label>
+                            <!--<input type="file" accept="image/*" value="上传图片">-->
+                            <label for="g_img" class="control-label">图片链接:</label>
+                            <input type="text" class="form-control" id="g_img" name="g_img" >
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <input type="submit" class="btn btn-primary"  value="保存"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!--<b type="submit" class="btn btn-primary" id="save" value="保存"></b>-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--修改库存模态款-->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addEmpModel3">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >修改单价</h4>
+                </div>
+                <div class="modal-body">
+                    <form  action="/updatePrice"  method="post">
+                        <!--<input hidden id="mark" value="add"/>-->
+                        <div class="form-group hidden">
+                            <label for="id3" class="control-label">商品编号:</label>
+                            <input type="text" class="form-control" id="id3" name="id3">
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname" class="control-label">商品名称:</label>
+                            <input type="text" class="form-control" id="username3"  name="username3" >
+                        </div>
+                        <div class="form-group" >
+                            <label for="g_oriprice" class="control-label">商品原价:</label>
+                            <input type="text" class="form-control" id="g_oriprice" name="g_oriprice">
+                        </div>
+                        <div class="form-group" >
+                            <label for="g_price" class="control-label">商品现价:</label>
+                            <input type="text" class="form-control" id="g_price" name="g_price">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <input type="submit" class="btn btn-primary"  value="保存"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!--<b type="submit" class="btn btn-primary" id="save" value="保存"></b>-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addEmpModel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >修改库存</h4>
+                </div>
+                <div class="modal-body">
+                    <form  action="/updateKucun"  method="post">
+                        <!--<input hidden id="mark" value="add"/>-->
+                        <div class="form-group hidden">
+                            <label for="id2" class="control-label">商品编号:</label>
+                            <input type="text" class="form-control" id="id2" name="id2">
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname" class="control-label">商品名称:</label>
+                            <input type="text" class="form-control" id="username2"  name="username2" >
+                        </div>
+                        <div class="form-group" >
+                            <label for="kucun" class="control-label">库存:</label>
+                            <input type="text" class="form-control" id="kucun" name="kucun">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <input type="submit" class="btn btn-primary"  value="保存"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!--<b type="submit" class="btn btn-primary" id="save" value="保存"></b>-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+</div>
+<script>
+    <!--三级联动-->
+    layui.use(['form','code'], function(){
+        form = layui.form;
+        layui.code();
+        $('#x-city').xcity('','','');
+
+    });
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+    });
+
+
+</script>
+
+</body>
+
+</html>

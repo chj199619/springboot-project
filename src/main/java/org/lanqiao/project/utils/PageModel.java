@@ -118,8 +118,9 @@ public class PageModel {
     }
 
 
-    public void setTotalPageNum(int totalPageNum) {
-        this.totalPageNum = totalPageNum;
+    public int setTotalPageNum() {
+
+        return totalPageNum;
     }
 
 

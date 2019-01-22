@@ -135,7 +135,7 @@
 
     <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>-->
     <button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>添加</button>
-    <button class="layui-btn" id="layui-btn2" href="/memberlist2.do">重置</button>
+    <button class="layui-btn" id="layui-btn2" ><a href="/memberlist2.do" style="text-decoration-line: none;color: white">重置</a></button>
 
   </xblock>
   <table class="layui-table">
@@ -188,7 +188,7 @@
   </table>
 
   <!--分页插件-->
-  <center th:if="${size}!=0">
+  <center th:if="${userList.size()}!=0">
     <nav aria-label="Page navigation">
       <ul class="pagination">
         <li  th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>
@@ -332,16 +332,14 @@
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
 </div>
-
-
 <script>
 <!--三级联动-->
     layui.use(['form','code'], function(){
-        form = layui.form;
-        layui.code();
-        $('#x-city').xcity('','','');
+    form = layui.form;
+    layui.code();
+    $('#x-city').xcity('','','');
 
-    });
+});
     layui.use('laydate', function(){
         var laydate = layui.laydate;
 
