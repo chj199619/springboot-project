@@ -41,7 +41,7 @@ public class UserController {
     }
 @RequestMapping("/memberlist2.do")
 public String getUserList(HttpServletRequest request,Model model){
-    int pageSize = 2;
+    int pageSize = 5;
     int pageNum = 1;
     if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
         pageNum = Integer.valueOf(request.getParameter("currentPage"));
@@ -51,7 +51,6 @@ public String getUserList(HttpServletRequest request,Model model){
     if(!StringUtils.isEmpty(u_id) && Integer.valueOf(u_id.toString()) != 0){
         condition.setU_id(Integer.valueOf(u_id.toString()));
     }
-
     Object u_name= request.getParameter("searchu_name");
     if(!StringUtils.isEmpty(u_name)){
         condition.setU_name(u_name.toString());
@@ -97,11 +96,12 @@ public String getUserList(HttpServletRequest request,Model model){
         String city=request.getParameter("city");
         String area=request.getParameter("area");
         String address=request.getParameter("address");
+        String address1=province+city+area+address;
         System.out.println(username+"前端的username输入值");
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd hh-MM");
         String time=sdf.format(date);
-        User user=new User(username,password,nikename,tel,email,time,province,city,area,address);
+        User user=new User(username,password,nikename,tel,email,time,province,city,area,address1);
         System.out.println(user+"9999999999999999999999999");
         userService.insertUser(user);
         return getUserList(request,model);
@@ -136,7 +136,7 @@ public String getUserList(HttpServletRequest request,Model model){
         return getUserList(request,model);
         }
 
-    @RequestMapping("ad-login.html")
+    @RequestMapping("aaa")
     public String loginOut(){
         return "ad-login";
     }

@@ -24,7 +24,7 @@ public interface ComputerAdminMapper {
     //修改单价
     public void updatePrice(double g_price,double g_oriprice,int g_id);
     //上架商品
-    @Insert("insert into goodscomput (g_img,g_name,g_xiangqing,g_price,g_oriprice,g_color,t_type,g_neicun,g_num) values (#{g_img},#{g_name},#{g_xiangqing},#{g_price},#{g_oriprice},#{g_color},#{t_type},#{g_neicun},#{g_num})")
+    @Insert("insert into goodscomput (g_img,g_name,g_xiangqing,g_price,g_oriprice,g_color,t_type,g_neicun,g_hiredate,g_num) values (#{g_img},#{g_name},#{g_xiangqing},#{g_price},#{g_oriprice},#{g_color},#{t_type},#{g_neicun},#{g_hiredate},#{g_num})")
     public void insertAddComput(Goodscomput goodscomput);
     //删除
     public void deletegoodscomput(int g_id);

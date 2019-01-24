@@ -1,6 +1,6 @@
 
 package org.lanqiao.project.pojo;
-public class Paper {
+public class PsPaper {
     private Integer id;
     private Integer ddid;
     private String name;
@@ -10,10 +10,10 @@ public class Paper {
     private String kuaidi;
     private int u_id;
 
-    public Paper() {
+    public PsPaper() {
     }
 
-    public Paper(Integer id, Integer ddid, String name, double orgp, double lastp, String pscondition, String kuaidi) {
+    public PsPaper(Integer id, Integer ddid, String name, double orgp, double lastp, String pscondition, String kuaidi) {
         this.id = id;
         this.ddid = ddid;
         this.name = name;
@@ -23,7 +23,7 @@ public class Paper {
         this.kuaidi = kuaidi;
     }
 
-    public Paper(Integer ddid, String name, double orgp, double lastp, String pscondition, String kuaidi) {
+    public PsPaper(Integer ddid, String name, double orgp, double lastp, String pscondition, String kuaidi) {
         this.ddid = ddid;
         this.name = name;
         this.orgp = orgp;
@@ -32,7 +32,7 @@ public class Paper {
         this.kuaidi = kuaidi;
     }
 
-    public Paper(Integer id, String pscondition) {
+    public PsPaper(Integer id, String pscondition) {
         this.id = id;
         this.pscondition = pscondition;
     }

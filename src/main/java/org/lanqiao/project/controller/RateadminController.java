@@ -1,5 +1,6 @@
 package org.lanqiao.project.controller;
 
+import com.alibaba.fastjson.JSON;
 import org.lanqiao.project.pojo.Condition;
 import org.lanqiao.project.pojo.Rate;
 import org.lanqiao.project.pojo.User;
@@ -12,6 +13,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @Controller
@@ -26,9 +30,9 @@ public class RateadminController {
             pageNum = Integer.valueOf(request.getParameter("currentPage"));
         }
         Condition condition = Condition.builder().build();
-        Object u_id = request.getParameter("searchu_id");
-        if(!StringUtils.isEmpty(u_id) && Integer.valueOf(u_id.toString()) != 0){
-            condition.setU_id(Integer.valueOf(u_id.toString()));
+        Object u_name = request.getParameter("searchu_name");
+        if(!StringUtils.isEmpty(u_name)){
+            condition.setU_name(u_name.toString());
         }
         Object o_id = request.getParameter("searcho_id");
         if(!StringUtils.isEmpty(o_id) && Integer.valueOf(o_id.toString()) != 0){
@@ -66,4 +70,25 @@ public class RateadminController {
         rateadminService.deleteRate(rate_id);
         return getRateList(request,model);
     }
+    @RequestMapping("/selectRateByid")
+    protected void getUserById(int rate_id,HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setContentType("text/json;charset=utf-8");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
+        Rate rate=rateadminService.selectRateByid(rate_id);
+        String rateJson = JSON.toJSONString(rate);
+        out.print(rateJson);
+    }
+    //回复评论
+    @RequestMapping("/answernews")
+    public String answernews(Model model,HttpServletRequest request){
+        String id=request.getParameter("id");
+        int id1=Integer.parseInt(id);
+        String newsanswer=request.getParameter("newsanswer");
+        System.out.println(id1+newsanswer+"!!!!!");
+        rateadminService.updateRate(newsanswer,id1);
+        return getRateList(request,model);
+    }
 }
+
+

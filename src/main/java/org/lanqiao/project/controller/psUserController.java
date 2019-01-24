@@ -1,11 +1,9 @@
 package org.lanqiao.project.controller;
 
 import com.alibaba.fastjson.JSON;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.lanqiao.project.pojo.Cond;
-import org.lanqiao.project.pojo.Paper;
+import org.lanqiao.project.pojo.PsPaper;
 import org.lanqiao.project.pojo.psCar;
-import org.lanqiao.project.service.PaperService;
+import org.lanqiao.project.service.PsPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,41 +18,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.lang.System.console;
 import static java.lang.System.out;
 
 @Controller
 public class psUserController {
     @Autowired
-    PaperService paperService;
-//    @RequestMapping("index")
-//    public String index(Model model){
-//        return "index";
-//    }
-//    @RequestMapping("member-list.html")
-//    public String aa(Model model){
-///*        List<User>userList=userService.selectAll();
-//        System.out.println("---------"+userList.size());
-//        model.addAttribute("userlist",userList);*/
-//        return "member-list";
-//    }
+    PsPaperService paperService;
     @RequestMapping("order-list.html")
     public String bb(Model model){
-        List<Paper>papers = this.getAll(model);
+        List<PsPaper>papers = this.getAll(model);
         return "order-list";
     }
-    @RequestMapping("order-view.html")
-    public String orderview(){
-        return "order-view";
-    }
+
     @RequestMapping("conditions")
     public String conditions(HttpServletRequest req, HttpServletResponse resp,String pscondition,Model model,String id) throws IOException {
 
         out.println(id+"---"+pscondition);
         out.println(pscondition);
         Integer pid = Integer.parseInt(id);
-        paperService.update(new Paper(pid,pscondition));
-        List<Paper>papers = this.getAll(model);
+        paperService.update(new PsPaper(pid,pscondition));
+        List<PsPaper>papers = this.getAll(model);
         return "order-list";
     }
 
@@ -63,7 +46,7 @@ public class psUserController {
     public String findcon(String conId,String condition,Model model) {
         out.println(condition);
         out.println("ddid--" + conId);
-        List<Paper> papers = null;
+        List<PsPaper> papers = null;
 //        id模糊查询
         if (conId != ""&&conId!=null) {
             Integer id = Integer.parseInt(conId);
@@ -87,7 +70,7 @@ public class psUserController {
         out.println("id:-----"+id);
         Integer pid= Integer.parseInt(id);
         paperService.deletePaper(pid);
-        List<Paper>papers = this.getAll(model);
+        List<PsPaper>papers = this.getAll(model);
         return "order-list";
     }
 
@@ -99,7 +82,7 @@ public class psUserController {
         System.out.println("id----"+id);
         if (id!=null){
             Integer pid= Integer.parseInt(id);
-            Paper paper = paperService.findById(pid);
+            PsPaper paper = paperService.findById(pid);
             System.out.println(paper);
             Map<String,Object> returnMap = new HashMap<>();
             returnMap.put("paper",paper);
@@ -129,8 +112,8 @@ public class psUserController {
         out.print(mapStr);
     }
 
-    public  List<Paper> getAll(Model model){
-        List<Paper> papers = paperService.findAll();
+    public  List<PsPaper> getAll(Model model){
+        List<PsPaper> papers = paperService.findAll();
         model.addAttribute("papers",papers);
         model.addAttribute("len",papers.size());
         return papers;

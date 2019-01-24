@@ -33,20 +33,6 @@ public class ManagerController {
            return "ad-login";
         }
     }
-    //添加管理员
-    @RequestMapping("admin-add.html")
-    public  String adminadd(){
-        return "admin-add";
-    }
-    //会员相关
-    @RequestMapping("admin-cate.html")
-    public  String admincate(){
-        return "admin-cate";
-    }
-    @RequestMapping("admin-edit.html")
-    public  String adminedit(){
-        return "admin-edit";
-    }
     //管理员表
     @RequestMapping("admin-list.html")
     public  String adminlist(Model model){
@@ -56,14 +42,7 @@ public class ManagerController {
         model.addAttribute("size",size);
         return "admin-list";
     }
-    @RequestMapping("admin-rule.html")
-    public  String adminrule(){
-        return "admin-rule";
-    }
-    @RequestMapping("admin-role.html")
-    public  String adminrole(){
-        return "admin-role";
-    }
+
 
 
 }

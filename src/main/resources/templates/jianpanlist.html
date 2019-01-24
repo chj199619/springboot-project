@@ -31,12 +31,12 @@
             }else{
                 var currentPage = currentPage;
             }
-            var url = "/goodscomputerTslist.do?currentPage="+currentPage+"&searchg_id="+searchg_id+"&searchg_name="+searchg_name+"&searcht_type="+searcht_type;
+            var url = "/goodsjianpanlist.do?currentPage="+currentPage+"&searchg_id="+searchg_id+"&searchg_name="+searchg_name+"&searcht_type="+searcht_type;
             window.location.href = url;
             // $(".layui-show").load(url)
         };
         $(function () {
-
+            //删除用户
             $(".delete").click(function () {
                 var isDelete = confirm ("确定删除吗？");
                 if(isDelete){
@@ -46,7 +46,7 @@
                     var searchg_name = $("#searchg_name").val();
                     var searcht_type = $("#searcht_type").val();
                     var currentPage = $("#currentPage").val();
-                    var url = "/deleteTsComputer?g_id=" + id + "&searchg_id=" + searchg_id +  "&searchg_name=" + searchg_name + "&searcht_type=" + searcht_type+"&currentPage=" + currentPage;
+                    var url = "/deletegoodjian?g_id=" + id + "&searchg_id=" + searchg_id +  "&searchg_name=" + searchg_name + "&searcht_type=" + searcht_type+"&currentPage=" + currentPage;
                     window.location.href = url;
                 }else{
                     return;
@@ -54,32 +54,20 @@
             });
             //新增模态框
             $("#layui-btn").click(function () {
-                $("#id").val("");
-                $("#usenanme").val("");
-                $("#nickname").val("");
-                $("#password").val("");
-                $("#email").val("");
-                $("#tel").val("");
-                $("#province").val("");
-                $("#city").val("");
-                $("#area").val("");
-                $("#address").val("");
                 $('#addEmpModel').modal({
                     show:true
                 })
             });
-            //修改库存
             $(".updatekucun").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                // alert(id)
                 $.ajax({
-                    url:"/selectGoods2?g_id=" + id,
+                    url:"/selectjianpanGoods?g_id=" + id,
                     success:function (data) {
-                        var goodscomputer = eval(data);
-                        $("#id2").val(goodscomputer.g_id);
-                        $("#username2").val(goodscomputer.g_name);
+                        var goodsjianpan = eval(data);
+                        $("#id2").val(goodsjianpan.id);
+                        $("#username2").val(goodsjianpan.jname);
                         $("#username2").attr("readonly", "readonly");
-                        $("#kucun").val(goodscomputer.g_num);
+                        $("#kucun").val(goodsjianpan.jnum);
                         // $("#originpassword").val(user.u_password);
                     }
                 })
@@ -88,19 +76,18 @@
                 })
 
             })
-            //修改价格
             $(".updatePrice").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                // alert(id)
+
                 $.ajax({
-                    url:"/selectGoods2?g_id=" + id,
+                    url:"/selectjianpanGoods?g_id=" + id,
                     success:function (data) {
-                        var goodscomputer = eval(data);
-                        $("#id3").val(goodscomputer.g_id);
-                        $("#username3").val(goodscomputer.g_name);
+                        var goodsjianpan = eval(data);
+                        $("#id3").val(goodsjianpan.id);
+                        $("#username3").val(goodsjianpan.jname);
                         $("#username3").attr("readonly", "readonly");
-                        $("#g_oriprice").val(goodscomputer.g_oriprice);
-                        $("#g_price").val(goodscomputer.g_price);
+                        $("#g_oriprice").val(goodsjianpan.jorgprice);
+                        $("#g_price").val(goodsjianpan.jlastprice);
                     }
                 })
                 $('#addEmpModel3').modal({
@@ -129,13 +116,15 @@
             <input type="text" name="searcht_type" id="searcht_type"  placeholder="请输入商品品牌" autocomplete="off" class="layui-input" th:value="${condition.t_type}">
             <input type="text" name="searchg_name" id="searchg_name" placeholder="请输入商品名称" autocomplete="off" class="layui-input" th:value="${condition.g_name}">
             <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+
         </form>
+
     </div>
     <xblock>
 
         <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>-->
         <button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>上架商品</button>
-        <button class="layui-btn" id="layui-btn2"><a href="/goodscomputerTslist.do" style="text-decoration-line: none;color: white">重置</a></button>
+        <button class="layui-btn" id="layui-btn2"><a href="/goodsjianpanlist.do" style="text-decoration-line: none;color: white">重置</a></button>
 
 
     </xblock>
@@ -145,11 +134,8 @@
             <th style="font-size: 8px">编号</th>
             <th style="font-size: 8px">图片</th>
             <th style="font-size: 8px">商品名称</th>
-            <th style="font-size: 8px">商品详情</th>
             <th style="font-size: 8px">价格</th>
             <th style="font-size: 8px">原价</th>
-            <th style="font-size: 8px">内存</th>
-            <th style="font-size: 8px">颜色</th>
             <th style="font-size: 8px">品牌</th>
             <th style="font-size: 8px">上架时间</th>
             <th style="font-size: 8px">库存</th>
@@ -157,18 +143,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="goodscomputer:${goodscomputerList}" >
-            <td style="font-size: 8px">[[${goodscomputer.g_id}]]</td>
-            <td style="font-size: 8px"><img th:src="${goodscomputer.g_img}" style="width:50px;height:50px"></td>
-            <td style="font-size: 8px">[[${goodscomputer.g_name}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_xiangqing}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_price}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_oriprice}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_neicun}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_color}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.t_type}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_hiredate}]]</td>
-            <td style="font-size: 8px">[[${goodscomputer.g_num}]]</td>
+        <tr th:each="goodsjianpan:${goodsjianpanList}" >
+            <td style="font-size: 8px">[[${goodsjianpan.id}]]</td>
+            <td style="font-size: 8px"><img th:src="${goodsjianpan.jpicture}" style="width: 50px;height:50px;" ></td>
+            <td style="font-size: 8px">[[${goodsjianpan.jname}]]</td>
+            <td style="font-size: 8px">[[${goodsjianpan.jlastprice}]]</td>
+            <td style="font-size: 8px">[[${goodsjianpan.jorgprice}]]</td>
+            <td style="font-size: 8px">[[${goodsjianpan.t_type}]]</td>
+            <td style="font-size: 8px">[[${goodsjianpan.jhiredate}]]</td>
+            <td style="font-size: 8px">[[${goodsjianpan.jnum}]]</td>
             <td class="td-manage">
                 <a  title="修改单价" class="updatePrice" >
                     <i class="layui-icon">&#xe631;</i>
@@ -176,16 +159,19 @@
                 <a  title="修改库存" class="updatekucun" >
                     <i class="layui-icon">&#xe6b2;</i>
                 </a>
+
                 <a title="下架商品" class="delete"   >
                     <i class="layui-icon">&#xe640;</i>
                 </a>
+
             </td>
+
         </tr>
+
         </tbody>
     </table>
-
     <!--分页插件-->
-    <center th:if="${goodscomputerList.size()!=0}">
+    <center th:if="${goodsjianpanList.size()!=0}">
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li  th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>
@@ -209,7 +195,6 @@
             </ul>
         </nav>
     </center>
-
     <!--模态款-->
     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addEmpModel">
         <div class="modal-dialog" role="document">
@@ -219,7 +204,7 @@
                     <h4 class="modal-title" id="gridSystemModalLabel">上架新品</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="addForm" action="/addgoodscomputer"  method="post" class="layui-form layui-col-md12  layui-form-pane">
+                    <form id="addForm" action="/addgoodsjianpan"  method="post" class="layui-form layui-col-md12  layui-form-pane">
                         <!--<input hidden id="mark" value="add"/>-->
                         <div class="form-group hidden">
                             <label for="id" class="control-label">用户编号:</label>
@@ -229,10 +214,7 @@
                             <label for="goodsname" class="control-label">商品名称:</label>
                             <input type="text" class="form-control" id="goodsname" name="goodsname" >
                         </div>
-                        <!--<div class="form-group">-->
-                        <!--<label for="goodsxq" class="control-label">商品详情:</label>-->
-                        <!--<input type="text" class="form-control" id="goodsxq" name="goodsxq" >-->
-                        <!--</div>-->
+
                         <div class="form-group">
                             <label for="price" class="control-label">价格:</label>
                             <input type="text" class="form-control" id="price" name="price">
@@ -241,10 +223,7 @@
                             <label for="oriprice" class="control-label">原价:</label>
                             <input type="text" class="form-control" id="oriprice" name="oriprice" >
                         </div>
-                        <div class="form-group">
-                            <label for="color" class="control-label">颜色:</label>
-                            <input type="text" class="form-control" id="color" name="color" >
-                        </div>
+
                         <div class="form-group">
                             <label for="t_type" class="control-label">商品品牌:</label>
                             <input type="text" class="form-control" id="t_type" name="t_type" >
@@ -252,46 +231,6 @@
                         <div class="form-group">
                             <label for="g_num" class="control-label">库存:</label>
                             <input type="text" class="form-control" id="g_num" name="g_num" >
-                        </div>
-                        <label class="control-label">商品详情:</label>
-                        <div class="layui-form-item" >
-                            <div class="layui-input-inline">
-                                <select th:name="condition1">
-                                    <option value="">请选择系统</option>
-                                    <option >系统：Windows 10</option>
-                                    <option >系统：Windows 7</option>
-                                </select>
-                            </div>
-                            <div class="layui-input-inline">
-                                <select th:name="condition2">
-                                    <option value="">请选择处理器</option>
-                                    <option>英特尔酷睿I7-8750U</option>
-                                    <option >英特尔酷睿I7-8750U</option>
-                                    <option >英特尔酷睿I7-8650U</option>
-                                    <option >英特尔酷睿I5-8650U</option>
-                                    <option >英特尔酷睿I3-8750U</option>
-
-                                </select>
-                            </div>
-                            <div class="layui-input-inline">
-                                <select th:name="condition3">
-                                    <option value="">请选择显卡类别</option>
-                                    <option >显卡型号：GTX1060Ti</option>
-                                    <option >显卡型号：GTX1050Ti</option>
-                                    <option>显卡型号：GTX1070Ti</option>
-                                    <option >显卡类别：集成显卡</option>
-                                    <option >显卡类别：入门级游戏独立显卡</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">运行内存:</label>
-                            <!--<input type="text" class="form-control" id="neicun" name="neicun" >-->
-                            <select th:name="condition4">
-                                <option >4G</option>
-                                <option >8G</option>
-                                <option >16G</option>
-                            </select>
                         </div>
                         <div class="form-group">
                             <label  class="control-label">上传图片:</label>
@@ -322,7 +261,7 @@
                     <h4 class="modal-title" >修改单价</h4>
                 </div>
                 <div class="modal-body">
-                    <form  action="/updateTsPrice"  method="post">
+                    <form  action="/updatejianpanPrice"  method="post">
                         <!--<input hidden id="mark" value="add"/>-->
                         <div class="form-group hidden">
                             <label for="id3" class="control-label">商品编号:</label>
@@ -361,7 +300,7 @@
                     <h4 class="modal-title" >修改库存</h4>
                 </div>
                 <div class="modal-body">
-                    <form  action="/updateTsKucun"  method="post">
+                    <form  action="/updatejianpanKucun"  method="post">
                         <!--<input hidden id="mark" value="add"/>-->
                         <div class="form-group hidden">
                             <label for="id2" class="control-label">商品编号:</label>
@@ -388,8 +327,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
-
-
 </div>
 <script>
     <!--三级联动-->

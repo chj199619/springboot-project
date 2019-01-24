@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -114,7 +116,10 @@ public class ComputerTsAdminController {
         String select3=request.getParameter("condition3");
         String g_xiangqing=select1+","+select2+","+select3;
         String g_neicun=request.getParameter("condition4");
-        Goodscomputer goodscomputer=new Goodscomputer(g_img,g_name,g_xiangqing,price1,oriprice2,color,t_type,g_neicun,num);
+        Date date=new Date();
+        SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd hh-MM");
+        String time=sdf.format(date);
+        Goodscomputer goodscomputer=new Goodscomputer(g_img,g_name,g_xiangqing,price1,oriprice2,color,t_type,g_neicun,time,num);
         computerTsAdminService.insertAddComputer(goodscomputer);
         return getGoodsComputerList(request,model);
 

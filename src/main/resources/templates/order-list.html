@@ -55,7 +55,7 @@
           <tr>
             <th class="removeit" >订单编号</th>
             <th>收货人</th>
-            <th>总金额</th>
+            <th hidden>总金额</th>
             <th>应付金额</th>
             <th>查看详情</th>
             <th>订单状态</th>
@@ -68,7 +68,7 @@
             <td th:text="${paper.id}" hidden="hidden"></td>
             <td th:text="${paper.ddid}"></td>
             <td th:text="${paper.name}"></td>
-            <td th:text="${paper.orgp}"></td>
+            <td hidden th:text="${paper.orgp}"></td>
             <td th:text="${paper.lastp}"></td>
             <td><a th:href="@{'/detail?ddid='+${paper.ddid}+'&uid='+${paper.u_id}}">查看</a></td>
             <td th:text="${paper.pscondition}"></td>

@@ -21,7 +21,7 @@ public interface ComputerTsAdminMapper {
     //修改单价
     public void updateTsPrice(double g_price,double g_oriprice,int g_id);
     //上架商品
-    @Insert("insert into goodscomputer (g_img,g_name,g_xiangqing,g_price,g_oriprice,g_color,t_type,g_neicun,g_num) values (#{g_img},#{g_name},#{g_xiangqing},#{g_price},#{g_oriprice},#{g_color},#{t_type},#{g_neicun},#{g_num})")
+    @Insert("insert into goodscomputer (g_img,g_name,g_xiangqing,g_price,g_oriprice,g_color,t_type,g_neicun,g_hiredate,g_num) values (#{g_img},#{g_name},#{g_xiangqing},#{g_price},#{g_oriprice},#{g_color},#{t_type},#{g_neicun},#{g_hiredate},#{g_num})")
     public void insertAddComputer(Goodscomputer goodscomputer);
     //删除
     public void deleteTsComputer(int g_id);

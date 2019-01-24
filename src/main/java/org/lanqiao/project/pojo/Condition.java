@@ -19,4 +19,7 @@ public class Condition {
     private Integer o_id;
     private Integer g_id;
     private String t_type;
+    private String zhuangtai;
+    private Integer id;
+    private String jname;
 }

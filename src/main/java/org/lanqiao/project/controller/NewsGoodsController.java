@@ -1,9 +1,11 @@
 package org.lanqiao.project.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.lanqiao.project.pojo.Condition;
-import org.lanqiao.project.pojo.Goodscomput;
-import org.lanqiao.project.service.ComputerAdminService;
+
+import org.lanqiao.project.pojo.Goodscomputnew;
+import org.lanqiao.project.service.NewGoodsService;
 import org.lanqiao.project.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,11 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class ComputerAdminController {
+public class NewsGoodsController {
     @Autowired
-    ComputerAdminService computerAdminService;
-    @RequestMapping("/goodscomputerlist.do")
-    public String getGoodsComputerList(HttpServletRequest request, Model model) {
+    NewGoodsService newGoodsService;
+    @RequestMapping("/goodsnewslist.do")
+    public String getGoodsNewList(HttpServletRequest request, Model model) {
         int pageSize = 5;
         int pageNum = 1;
         if(!StringUtils.isEmpty(request.getParameter("currentPage"))){
@@ -43,7 +45,7 @@ public class ComputerAdminController {
         if(!StringUtils.isEmpty(t_type)){
             condition.setT_type(t_type.toString());
         }
-        int totalRecords = computerAdminService.getComputerCount(condition);
+        int totalRecords = newGoodsService.getComputerCount(condition);
         PageModel pm = new PageModel(pageNum,totalRecords,pageSize);
         //如果当前页大于总页数，但是排除查询不到数据的情况。当前页等于最大页
         if(pageNum > pm.getTotalPageNum() && pm.getTotalPageNum() != 0){
@@ -54,26 +56,26 @@ public class ComputerAdminController {
         condition.setPageSize(pageSize);
         condition.setCurrentPage(pageModel.getStartIndex());
         System.out.println(condition);
-        List<Goodscomput> goodscomputList = computerAdminService.getAll(condition);
-        model.addAttribute("goodscomputList",goodscomputList);
+        List<Goodscomputnew> goodscomputnewList = newGoodsService.getAll(condition);
+        model.addAttribute("goodscomputnewList",goodscomputnewList);
         model.addAttribute("pm",pageModel);
         model.addAttribute("condition",condition);
         model.addAttribute("currentPage",pageNum);
-        return "goodscomputer";
+        return "goodsnewslist";
     }
     //修改库存
-    @RequestMapping("/updateKucun")
+    @RequestMapping("/updatenewKucun")
     public String updateGoodscomputKucun(Model model,HttpServletRequest request){
         String id=request.getParameter("id2");
         int id1=Integer.parseInt(id);
         String kucun=request.getParameter("kucun");
         int kc=Integer.parseInt(kucun);
         System.out.println(id1+kc+"!!!!!");
-        computerAdminService.updateKucun(kc,id1);
-        return getGoodsComputerList(request,model);
+        newGoodsService.updateKucun(kc,id1);
+        return getGoodsNewList(request,model);
     }
     //修改库存
-    @RequestMapping("/updatePrice")
+    @RequestMapping("/updatenewPrice")
     public String updateGoodscomputPrice(Model model,HttpServletRequest request){
         String id=request.getParameter("id3");
         int id1=Integer.parseInt(id);
@@ -81,21 +83,21 @@ public class ComputerAdminController {
         Double g_oriprice1=Double.valueOf(g_oriprice);
         String g_price=request.getParameter("g_price");
         Double g_price1=Double.valueOf(g_price);
-        computerAdminService.updatePrice(g_price1,g_oriprice1,id1);
-        return getGoodsComputerList(request,model);
+        newGoodsService.updatePrice(g_price1,g_oriprice1,id1);
+        return getGoodsNewList(request,model);
     }
     //根据id查询商品详情回显出来传到前段用ajax写出回显值
-    @RequestMapping("/selectGoods")
+    @RequestMapping("/selectnewGoods")
     protected void getUserById(int g_id,HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/json;charset=utf-8");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
-        Goodscomput goodscomput=computerAdminService.selectGooodsComputById(g_id);
+        Goodscomputnew goodscomput=newGoodsService.selectGooodsComputById(g_id);
         String goodscomputJson = JSON.toJSONString(goodscomput);
         out.print(goodscomputJson);
     }
     //上架商品
-    @RequestMapping("/addgoodscomput")
+    @RequestMapping("/addgoodsnew")
     public String addgoodscomput(Model model,HttpServletRequest request){
         String g_name=request.getParameter("goodsname");
         String price=request.getParameter("price");
@@ -111,19 +113,21 @@ public class ComputerAdminController {
         String select2=request.getParameter("condition2");
         String select3=request.getParameter("condition3");
         String g_xiangqing=select1+","+select2+","+select3;
+
         String g_neicun=request.getParameter("condition4");
         Date date=new Date();
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd hh-MM");
         String time=sdf.format(date);
-        Goodscomput goodscomput=new Goodscomput(g_img,g_name,g_xiangqing,price1,oriprice2,color,t_type,g_neicun,time,num);
-        computerAdminService.insertAddComput(goodscomput);
-         return getGoodsComputerList(request,model);
+        Goodscomputnew goodscomputer=new Goodscomputnew(g_img,g_name,g_xiangqing,price1,oriprice2,color,t_type,g_neicun,time,num);
+        System.out.println(goodscomputer+"llllllllllllllllllll000000");
+        newGoodsService.insertAddComput(goodscomputer);
+
+        return getGoodsNewList(request,model);
     }
     //删除
-    @RequestMapping("/deletegoodcomput")
+    @RequestMapping("/deletegoodnew")
     public String delete(HttpServletRequest request,Model model,int g_id){
-        computerAdminService.deletegoodscomput(g_id);
-        return getGoodsComputerList(request,model);
+        newGoodsService.deletegoodscomput(g_id);
+        return getGoodsNewList(request,model);
     }
-
 }

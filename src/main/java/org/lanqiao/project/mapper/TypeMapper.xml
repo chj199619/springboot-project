@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.project.mapper.TypeMapper">
+    <select id="getAll" resultType="org.lanqiao.project.pojo.Type" parameterType="org.lanqiao.project.pojo.Condition">
+        select * from  type
+        <where>
+
+            <if test="id != null &amp;&amp; id != 0">
+                and id = #{id}
+            </if>
+            <if test="t_type != null &amp;&amp; t_type != ''">
+                and  t_type like concat ('%', #{t_type}, '%')
+            </if>
+            <if test="zhuangtai != null &amp;&amp; zhuangtai != ''">
+                and  zhuangtai =#{zhuangtai}
+            </if>
+        </where>
+        <if test="currentPage != null">
+            limit #{currentPage}, #{pageSize}
+        </if>
+    </select>
+    <select id="getTypeCount" parameterType="org.lanqiao.project.pojo.Condition" resultType="int">
+        select count(1) from  type
+        <where>
+            <if test="id != null &amp;&amp; id != 0">
+                and id = #{id}
+            </if>
+            <if test="t_type != null &amp;&amp; t_type != ''">
+                and  t_type like concat ('%', #{t_type}, '%')
+            </if>
+            <if test="zhuangtai != null &amp;&amp; zhuangtai != ''">
+                and  zhuangtai =#{zhuangtai}
+            </if>
+        </where>
+    </select>
+    <delete id="deleteType" parameterType="int">
+        delete from type where id=#{id}
+    </delete>
+    <update id="updateRate" parameterType="org.lanqiao.project.pojo.Type">
+        update type set zhuangtai = #{zhuangtai},x_time= #{x_time} where id = #{id}
+    </update>
+    <update id="updateRate2" parameterType="org.lanqiao.project.pojo.Type">
+        update type set zhuangtai = #{zhuangtai},s_time= #{s_time} where id = #{id}
+    </update>
+    <update id="updateRate3" parameterType="org.lanqiao.project.pojo.Type">
+        update type set zhuangtai = #{zhuangtai},s_time= #{s_time},x_time= #{x_time} where id = #{id}
+    </update>
+
+
+
+
+</mapper>

@@ -1,9 +1,6 @@
 package org.lanqiao.project.pojo;
 
-import lombok.*;
-
-
-public class Goodscomputer {
+public class Goodscomputnew {
     private int g_id;
     private String g_img;
     private String g_name;
@@ -16,10 +13,23 @@ public class Goodscomputer {
     private int g_num;
     private String g_hiredate;
 
-    public Goodscomputer() {
+    public Goodscomputnew() {
     }
 
-    public Goodscomputer(int g_id, String g_img, String g_name, double g_price, String g_xiangqing, String g_color, String t_type, double g_oriprice, String g_neicun,String g_hiredate, int g_num) {
+    public Goodscomputnew(String g_img, String g_name,String g_xiangqing, double g_price, double g_oriprice,String g_color, String t_type,  String g_neicun, String g_hiredate, int g_num) {
+        this.g_img = g_img;
+        this.g_name = g_name;
+        this.g_price = g_price;
+        this.g_xiangqing = g_xiangqing;
+        this.g_color = g_color;
+        this.t_type = t_type;
+        this.g_oriprice = g_oriprice;
+        this.g_neicun = g_neicun;
+        this.g_num = g_num;
+        this.g_hiredate = g_hiredate;
+    }
+
+    public Goodscomputnew(int g_id, String g_img, String g_name, double g_price, String g_xiangqing, String g_color, String t_type, double g_oriprice, String g_neicun, int g_num, String g_hiredate) {
         this.g_id = g_id;
         this.g_img = g_img;
         this.g_name = g_name;
@@ -30,27 +40,6 @@ public class Goodscomputer {
         this.g_oriprice = g_oriprice;
         this.g_neicun = g_neicun;
         this.g_num = g_num;
-        this.g_hiredate = g_hiredate;
-    }
-
-    public Goodscomputer(String g_img, String g_name,String g_xiangqing, double g_price,double g_oriprice, String g_color, String t_type,  String g_neicun,String g_hiredate, int g_num) {
-        this.g_img = g_img;
-        this.g_name = g_name;
-        this.g_price = g_price;
-        this.g_xiangqing = g_xiangqing;
-        this.g_color = g_color;
-        this.t_type = t_type;
-        this.g_oriprice = g_oriprice;
-        this.g_neicun = g_neicun;
-        this.g_hiredate = g_hiredate;
-        this.g_num = g_num;
-    }
-
-    public String getG_hiredate() {
-        return g_hiredate;
-    }
-
-    public void setG_hiredate(String g_hiredate) {
         this.g_hiredate = g_hiredate;
     }
 
@@ -134,9 +123,17 @@ public class Goodscomputer {
         this.g_num = g_num;
     }
 
+    public String getG_hiredate() {
+        return g_hiredate;
+    }
+
+    public void setG_hiredate(String g_hiredate) {
+        this.g_hiredate = g_hiredate;
+    }
+
     @Override
     public String toString() {
-        return "Goodscomputer{" +
+        return "Goodscomputnew{" +
                 "g_id=" + g_id +
                 ", g_img='" + g_img + '\'' +
                 ", g_name='" + g_name + '\'' +

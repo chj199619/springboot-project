@@ -26,4 +26,14 @@ public class RateadminService implements RateadminMapper {
     public void deleteRate(int rate_id) {
         rateadminMapper.deleteRate(rate_id);
     }
+
+    @Override
+    public Rate selectRateByid(int rate_id) {
+        return rateadminMapper.selectRateByid(rate_id);
+    }
+
+    @Override
+    public void updateRate(String answernews, int rate_id) {
+        rateadminMapper.updateRate(answernews,rate_id);
+    }
 }

@@ -23,60 +23,60 @@
     <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
     <script>
         function search(currentPage) {
-            var searchu_name = $("#searchu_name").val();
-            var searcho_id = $("#searcho_id").val();
-            var searchg_name = $("#searchg_name").val();
+            var searchid = $("#searchid").val();
             var searcht_type = $("#searcht_type").val();
+            var searchzhuangtai = $("#searchzhuangtai").val();
             if(currentPage == null){
                 var currentPage = $("#currentPage").val();
             }else{
                 var currentPage = currentPage;
             }
-            var url = "/rate.do?currentPage="+currentPage+"&searchu_name="+searchu_name+"&searcho_id="+searcho_id+"&searchg_name="+searchg_name+"&searcht_type="+searcht_type;
+            var url = "/typelist?currentPage="+currentPage+"&searchid="+searchid+"&searcht_type="+searcht_type+"&searchzhuangtai="+searchzhuangtai;
             window.location.href = url;
             // $(".layui-show").load(url)
         };
+        //shanchu
         $(function () {
-            //删除用户
             $(".delete").click(function () {
                 var isDelete = confirm ("确定删除吗？");
                 if(isDelete){
                     var id = $(this).parent().parent().children("td:eq(0)").text();
                     //查询条件
-                    var searchu_name = $("#searchu_name").val();
-                    var searcho_id = $("#searcho_id").val();
-                    var searchg_name = $("#searchg_name").val();
+                    var searchid = $("#searchid").val();
+                    var searchzhuangtai = $("#searchzhuangtai").val();
                     var searcht_type = $("#searcht_type").val();
                     var currentPage = $("#currentPage").val();
-                    var url = "/deleteRate.do?rate_id=" + id + "&searchu_name=" + searchu_name + "&searcho_id=" + searcho_id + "&searchg_name=" + searchg_name + "&searcht_type=" + searcht_type+"&currentPage=" + currentPage;
+                    var url = "/deleteTypeById?id=" + id + "&searchid=" + searchid +  "&searchzhuangtai=" + searchzhuangtai + "&searcht_type=" + searcht_type+"&currentPage=" + currentPage;
                     window.location.href = url;
                 }else{
                     return;
                 }
             });
-       //回显回复
-            $(".ratenews").click(function () {
-                var id = $(this).parent().parent().children("td:eq(0)").text();
-                $.ajax({
-                    url:"/selectRateByid?rate_id=" + id,
-                    success:function (data) {
-                        var rate = eval(data);
-                        $("#id").val(rate.rate_id);
-                        $("#username").val(rate.u_name);
-                        $("#username").attr("readonly", "readonly");
-                        // $("#o_id").val(rate.o_id);
-                        $("#g_namerate").val(rate.g_name);
-                        $("#g_namerate").attr("readonly", "readonly");
-                        $("#ratesay").val(rate.news)
-                        $("#ratesay").attr("readonly", "readonly");
-
-
-                    }
-                })
+            //新增模态框
+            $("#layui-btn").click(function () {
                 $('#addEmpModel').modal({
                     show:true
                 })
             });
+            //修改库存
+            $(".updatezhuangtai").click(function () {
+                var id = $(this).parent().parent().children("td:eq(0)").text();
+                // alert(id)
+                $.ajax({
+                    url:"/selectType?id=" + id,
+                    success:function (data) {
+                        var type = eval(data);
+                        $("#id2").val(type.id);
+                        $("#condition2").val(type.zhuangtai);
+                        // $("#originpassword").val(user.u_password);
+                    }
+                })
+                $('#addEmpModel2').modal({
+                    show:true
+                })
+
+            })
+
 
         })
     </script>
@@ -96,62 +96,65 @@
 <div class="x-body">
     <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-            <input type="text" name="searchu_name" id="searchu_name" placeholder="请输入用户名" autocomplete="off" class="layui-input" th:value="${condition.u_name}">
-            <input type="text" name="searcho_id" id="searcho_id" placeholder="请输入订单编号" autocomplete="off" class="layui-input" th:value="${condition.o_id}">
+            <input type="text" name="searchid"  id="searchid" placeholder="请输入类别编号" autocomplete="off" class="layui-input" th:value="${condition.id}">
             <input type="text" name="searcht_type" id="searcht_type"  placeholder="请输入商品类别" autocomplete="off" class="layui-input" th:value="${condition.t_type}">
-            <input type="text" name="searchg_name" id="searchg_name" placeholder="请输入商品名称" autocomplete="off" class="layui-input" th:value="${condition.g_name}">
-            <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-
+            <!--<input type="text" name="searchzhuangtai" id="searchzhuangtai" placeholder="请输入商品状态" autocomplete="off" class="layui-input" th:value="${condition.zhuangtai}">-->
+            <div class="layui-input-inline">
+                <select th:name="searchzhuangtai"  id="searchzhuangtai" name="searchzhuangtai">
+                    <option th:value="${condition.zhuangtai}"></option>
+                    <option >预售</option>
+                    <option >已上架</option>
+                    <option >已停售</option>
+                    <option>敬请期待</option>
+                </select>
+            </div>
+            <button class="layui-btn"  lay-submit="" lay-filter="sreach" ><i class="layui-icon">&#xe615;</i></button>
         </form>
-
     </div>
     <xblock>
 
         <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>-->
-        <button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>添加</button>
-        <button class="layui-btn" id="layui-btn2"><a href="/rate.do" style="text-decoration-line: none;color: white">重置</a></button>
+        <button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>上架商品类别</button>
+        <button class="layui-btn" id="layui-btn2"><a href="/typelist" style="text-decoration-line: none;color: white">重置</a></button>
 
 
     </xblock>
     <table class="layui-table">
         <thead>
         <tr>
-            <th>评论编号</th>
-            <th>用户名</th>
-            <th>订单编号</th>
-            <th>商品名称</th>
-            <th>商品类型</th>
-            <th>评价内容</th>
-            <th>评论回复</th>
-            <th>操作</th>
+            <th>类别编号</th>
+            <th>商品类别</th>
+            <th>状态</th>
+            <!--<th>商品种类</th>-->
+            <th>上架时间</th>
+            <th>下架时间</th>
+            <th>详情</th>
+            <th >操作</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="rate:${rateList}" >
-            <td>[[${rate.rate_id}]]</td>
-            <td>[[${rate.u_name}]]</td>
-            <td>[[${rate.o_id}]]</td>
-            <td>[[${rate.g_name}]]</td>
-            <td>[[${rate.t_type}]]</td>
-            <td>[[${rate.news}]]</td>
-            <td>[[${rate.answernews}]]</td>
+        <tr th:each="type:${typeList}" >
+            <td >[[${type.id}]]</td>
+            <td >[[${type.t_type}]]</td>
+            <td>[[${type.zhuangtai}]]</td>
+            <!--<td>[[${goodscomput}]]</td>-->
+            <td>[[${type.s_time}]]</td>
+            <td>[[${type.x_time}]]</td>
+            <td><a th:href="${type.t_herf}">查看详情</a></td>
             <td class="td-manage">
-                <a  title="评论回复" class="ratenews" >
-                    <i class="layui-icon">&#xe6b2;</i>
+                <a  title="修改状态" class="updatezhuangtai" >
+                    <i class="layui-icon">&#xe631;</i>
                 </a>
-                <a title="删除" class="delete"   >
+                <a title="下架商品" class="delete"   >
                     <i class="layui-icon">&#xe640;</i>
                 </a>
             </td>
-
-
         </tr>
-
         </tbody>
     </table>
 
     <!--分页插件-->
-    <center >
+    <center th:if="${typeList.size()!=0}">
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li  th:onclick="search([[${pm.startPage}]])"><a href="javascript:void(0);"><span>首页</span></a></li>
@@ -182,30 +185,76 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="gridSystemModalLabel">评论回复</h4>
+                    <h4 class="modal-title" id="gridSystemModalLabel">上架新品</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="addForm" action="/answernews"  method="post" class="layui-form layui-col-md12  layui-form-pane">
+                    <form id="addForm" action="/addType"  method="post" class="layui-form layui-col-md12  layui-form-pane">
                         <!--<input hidden id="mark" value="add"/>-->
                         <div class="form-group hidden">
-                            <label for="id" class="control-label">评论编号:</label>
+                            <label for="id" class="control-label">类别编号:</label>
                             <input type="text" class="form-control" id="id" name="id">
                         </div>
                         <div class="form-group">
-                            <label for="username" class="control-label">用户名:</label>
-                            <input type="text" class="form-control" id="username" name="username" >
+                            <label for="t_type" class="control-label">商品类别:</label>
+                            <input type="text" class="form-control" id="t_type" name="t_type" >
+                        </div>
+                        <label class="control-label">商品状态:</label>
+                        <div class="layui-form-item" >
+                            <div class="layui-input-inline">
+                                <select th:name="condition">
+                                    <option value="">请选择状态</option>
+                                    <option >预售</option>
+                                    <option >上架</option>
+                                    <option>已停售</option>
+                                    <option>敬请期待</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            <input type="submit" class="btn btn-primary"  value="保存"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                    <!--<b type="submit" class="btn btn-primary" id="save" value="保存"></b>-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!--修改库存模态款-->
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel" id="addEmpModel2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >修改状态</h4>
+                </div>
+                <div class="modal-body">
+                    <form  action="/updatezhuangtai"  method="post">
+                        <!--<input hidden id="mark" value="add"/>-->
+                        <div class="form-group hidden">
+                            <label for="id2" class="control-label">商品编号:</label>
+                            <input type="text" class="form-control" id="id2" name="id2">
                         </div>
                         <div class="form-group">
-                            <label for="g_namerate" class="control-label">商品名称:</label>
-                            <input type="text" class="form-control" id="g_namerate" name="g_namerate" >
-                        </div>
-                        <div class="form-group">
-                            <label for="ratesay" class="control-label">评价内容:</label>
-                            <input type="text" class="form-control" id="ratesay" name="ratesay" >
-                        </div>
-                        <div class="form-group">
-                            <label for="newsanswer" class="control-label">评论回复:</label>
-                            <input type="text" class="form-control" id="newsanswer" name="newsanswer" >
+                            <label  class="control-label">商品状态:</label>
+                            <div class="layui-form-item" >
+                                <div class="layui-input-inline">
+                                    <select th:name="condition2" id="condition2">
+                                        <option value="">请选择状态</option>
+                                        <option>预售</option>
+                                        <option>已上架</option>
+                                        <option>已停售</option>
+                                        <option>敬请期待</option>
+                                    </select>
+                                </div>
+
+                            </div>
                         </div>
 
                         <div class="modal-footer">
@@ -222,8 +271,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-
-    <!--修改密码模态款-->
 
 </div>
 <script>

@@ -70,7 +70,7 @@
             });
             $(".updatekucun").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                alert(id)
+
                 $.ajax({
                     url:"/selectGoods?g_id=" + id,
                     success:function (data) {
@@ -89,7 +89,7 @@
             })
             $(".updatePrice").click(function () {
                 var id = $(this).parent().parent().children("td:eq(0)").text();
-                alert(id)
+
                 $.ajax({
                     url:"/selectGoods?g_id=" + id,
                     success:function (data) {
@@ -142,31 +142,36 @@
     <table class="layui-table">
         <thead>
         <tr>
-            <th style="font-size: 10px">商品编号</th>
-            <th style="font-size: 10px">图片</th>
-            <th style="font-size: 10px">商品名称</th>
-            <th style="font-size: 10px">商品详情</th>
-            <th style="font-size: 10px">价格</th>
-            <th style="font-size: 10px">原价</th>
-            <th style="font-size: 10px">内存</th>
-            <th style="font-size: 10px">颜色</th>
-            <th style="font-size: 10px">商品品牌</th>
-            <th style="font-size: 10px">库存</th>
-            <th style="font-size: 10px">操作</th>
+            <th style="font-size: 8px">编号</th>
+            <th style="font-size: 8px">图片</th>
+            <th style="font-size: 8px">商品名称</th>
+            <th style="font-size: 8px">商品详情</th>
+            <th style="font-size: 8px">价格</th>
+            <th style="font-size: 8px">原价</th>
+            <th style="font-size: 8px">内存</th>
+            <th style="font-size: 8px">颜色</th>
+            <th style="font-size: 8px">品牌</th>
+            <th style="font-size: 8px">上架时间</th>
+            <th style="font-size: 8px">库存</th>
+            <th style="font-size: 8px">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="goodscomputer:${goodscomputList}" >
-            <td style="font-size: 10px">[[${goodscomputer.g_id}]]</td>
-            <td style="font-size: 10px"><img th:src="${goodscomputer.g_img}"></td>
-            <td style="font-size: 10px">[[${goodscomputer.g_name}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.g_xiangqing}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.g_price}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.g_oriprice}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.g_neicun}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.g_color}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.t_type}]]</td>
-            <td style="font-size: 10px">[[${goodscomputer.g_num}]]</td>
+            <td style="font-size: 8px">[[${goodscomputer.g_id}]]</td>
+            <td style="font-size: 8px"><img th:src="${goodscomputer.g_img}" style="width: 50px;height:50px;" ></td>
+            <td style="font-size: 8px">[[${goodscomputer.g_name}]]</td>
+            <td style="font-size: 8px" >[[${goodscomputer.g_xiangqing}]]</td>
+            <td style="font-size: 8px">[[${goodscomputer.g_price}]]</td>
+            <td style="font-size: 8px">[[${goodscomputer.g_oriprice}]]</td>
+            <td style="font-size: 8px">[[${goodscomputer.g_neicun}]]</td>
+            <td style="font-size: 8px">[[${goodscomputer.g_color}]]</td>
+
+            <td style="font-size: 8px">[[${goodscomputer.t_type}]]</td>
+
+            <td style="font-size: 8px">[[${goodscomputer.g_hiredate}]]</td>
+
+            <td style="font-size: 8px">[[${goodscomputer.g_num}]]</td>
             <td class="td-manage">
                 <a  title="修改单价" class="updatePrice" >
                     <i class="layui-icon">&#xe631;</i>

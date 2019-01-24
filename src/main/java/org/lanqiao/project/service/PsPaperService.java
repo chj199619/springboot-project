@@ -1,8 +1,8 @@
 package org.lanqiao.project.service;
 
-import org.lanqiao.project.mapper.PaperMapper;
-import org.lanqiao.project.pojo.Cond;
-import org.lanqiao.project.pojo.Paper;
+import org.lanqiao.project.mapper.PsPaperMapper;
+
+import org.lanqiao.project.pojo.PsPaper;
 import org.lanqiao.project.pojo.psCar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PaperService implements PaperMapper {
+public class PsPaperService implements PsPaperMapper {
     @Autowired
-    PaperMapper paperMapper;
+    PsPaperMapper paperMapper;
     @Override
-    public List<Paper> findAll() {
-        List<Paper> papers= paperMapper.findAll();
+    public List<PsPaper> findAll() {
+        List<PsPaper> papers= paperMapper.findAll();
         return papers;
     }
 
@@ -25,34 +25,31 @@ public class PaperService implements PaperMapper {
     }
 
     @Override
-    public Paper findById(Integer id) {
+    public PsPaper findById(Integer id) {
         return  paperMapper.findById(id);
     }
 
     @Override
-    public Paper findByOne(Integer ddid) {
+    public PsPaper findByOne(Integer ddid) {
         return paperMapper.findByOne(ddid);
     }
 
     @Override
-    public List<Paper> findByDdid(Integer ddid) {
+    public List<PsPaper> findByDdid(Integer ddid) {
         return paperMapper.findByDdid(ddid);
     }
 
     @Override
-    public List<Paper> fingBycondition(String condition) {
+    public List<PsPaper> fingBycondition(String condition) {
         return paperMapper.fingBycondition(condition);
     }
 
     @Override
-    public void update(Paper paper) {
+    public void update(PsPaper paper) {
         paperMapper.update(paper);
     }
 
-    @Override
-    public List<Cond> conds() {
-        return paperMapper.conds();
-    }
+
 
     @Override
     public List<psCar> details(int pid, int uid) {
