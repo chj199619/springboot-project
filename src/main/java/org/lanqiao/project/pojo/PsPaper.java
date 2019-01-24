@@ -9,6 +9,7 @@ public class PsPaper {
     private String pscondition;
     private String kuaidi;
     private int u_id;
+    private  String adress;
 
     public PsPaper() {
     }
@@ -99,6 +100,14 @@ public class PsPaper {
 
     public void setKuaidi(String kuaidi) {
         this.kuaidi = kuaidi;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     @Override

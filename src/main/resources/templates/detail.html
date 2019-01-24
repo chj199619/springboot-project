@@ -3,22 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>详情</title>
-    <!--<link rel="stylesheet" href="./bootstrap/css/bootstrap.css">-->
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/font.css">
-    <link rel="stylesheet" href="./css/xadmin.css">
-    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.css">
-    <script type="text/javascript" src="/js/jquery.min.js" ></script>
-    <script type="text/javascript" src="/bootstrap/js/bootstrap.js"></script>
-    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
-    <script type="text/javascript" src="./js/xadmin.js"></script>
-    <script type="text/javascript" src="./js/xcity.js"></script>
-    <script type="text/javascript" src="js/jquery-1.12.4.js"></script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
 </head>
 <body>
-<table class="layui-table">
+<span style="float: right" th:text="${name}+${phone}"/>
+<table class="table table-hover">
     <thead>
     <tr>
         <th>商品编号</th>
@@ -37,7 +26,6 @@
     </tr>
     </tbody>
 </table>
-
 <a style="float: right; margin-right: 270px;font-size: larger;text-decoration: none; color: blue" th:href="@{/findcon(condition= 全部订单)}">返回</a>
 
 </body>

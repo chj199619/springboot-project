@@ -2,6 +2,7 @@ package org.lanqiao.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.lanqiao.project.pojo.PsPaper;
+import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.pojo.psCar;
 import org.lanqiao.project.service.PsPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,8 +127,18 @@ public class psUserController {
         out.println(ddid+"--"+uid);
         int did = Integer.parseInt(ddid);
         int u_id = Integer.parseInt(uid);
+        User user = (User) paperService.user(u_id);
+        out.println(user);
+        String name ="暂无数据";
+        String phone ="13612536987";
+        if (user!=null){
+            name = user.getU_name();
+            phone= user.getU_phone();
+        }
         List<psCar> papers= paperService.details(did,u_id);
         out.println(papers);
+        model.addAttribute("name",name);
+        model.addAttribute("phone",phone);
         model.addAttribute("papers",papers);
         return "detail";
     }

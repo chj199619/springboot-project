@@ -3,6 +3,7 @@ package org.lanqiao.project.service;
 import org.lanqiao.project.mapper.PsPaperMapper;
 
 import org.lanqiao.project.pojo.PsPaper;
+import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.pojo.psCar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,4 +57,8 @@ public class PsPaperService implements PsPaperMapper {
         return paperMapper.details(pid,uid);
     }
 
+    @Override
+    public User user(int u_id) {
+        return paperMapper.user(u_id);
+    }
 }

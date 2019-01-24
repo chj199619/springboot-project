@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Update;
 
 
 import org.lanqiao.project.pojo.PsPaper;
+import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.pojo.psCar;
 import org.springframework.stereotype.Component;
 
@@ -37,4 +38,6 @@ public interface PsPaperMapper {
 
     @Select("select * from car where p_id=#{pid} and u_id=#{uid}")
     public List<psCar> details(int pid, int uid);
+    @Select("select * from user where u_id = #{u_id}")
+    public User user(int u_id);
 }
