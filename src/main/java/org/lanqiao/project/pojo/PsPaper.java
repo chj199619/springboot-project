@@ -1,5 +1,5 @@
-
 package org.lanqiao.project.pojo;
+
 public class PsPaper {
     private Integer id;
     private Integer ddid;
@@ -9,7 +9,8 @@ public class PsPaper {
     private String pscondition;
     private String kuaidi;
     private int u_id;
-    private  String adress;
+    private String adress;
+    private String cond;
 
     public PsPaper() {
     }
@@ -36,6 +37,29 @@ public class PsPaper {
     public PsPaper(Integer id, String pscondition) {
         this.id = id;
         this.pscondition = pscondition;
+    }
+
+
+    public PsPaper(Integer id, int u_id, String pscondition) {
+        this.id = id;
+        this.u_id = u_id;
+        this.pscondition = pscondition;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public String getCond() {
+        return cond;
+    }
+
+    public void setCond(String cond) {
+        this.cond = cond;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
     }
 
     public int getU_id() {
@@ -102,14 +126,6 @@ public class PsPaper {
         this.kuaidi = kuaidi;
     }
 
-    public String getAdress() {
-        return adress;
-    }
-
-    public void setAdress(String adress) {
-        this.adress = adress;
-    }
-
     @Override
     public String toString() {
         return "Paper{" +
@@ -120,6 +136,9 @@ public class PsPaper {
                 ", lastp=" + lastp +
                 ", pscondition='" + pscondition + '\'' +
                 ", kuaidi='" + kuaidi + '\'' +
+                ", u_id=" + u_id +
+                ", adress='" + adress + '\'' +
+                ", cond='" + cond + '\'' +
                 '}';
     }
 }

@@ -3,7 +3,7 @@ package org.lanqiao.project.service;
 import org.lanqiao.project.mapper.PsPaperMapper;
 
 import org.lanqiao.project.pojo.PsPaper;
-import org.lanqiao.project.pojo.User;
+import org.lanqiao.project.pojo.CUser;
 import org.lanqiao.project.pojo.psCar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,19 +46,25 @@ public class PsPaperService implements PsPaperMapper {
     }
 
     @Override
-    public void update(PsPaper paper) {
-        paperMapper.update(paper);
-    }
-
-
-
-    @Override
-    public List<psCar> details(int pid, int uid) {
-        return paperMapper.details(pid,uid);
+    public void update(String pscondition, int id) {
+        paperMapper.update(pscondition,id);
     }
 
     @Override
-    public User user(int u_id) {
+    public void UpdateCar(String cond, int p_id,int u_id) {
+        paperMapper.UpdateCar(cond,p_id,u_id);
+    }
+
+
+    @Override
+    public List<psCar> details(psCar car) {
+        return paperMapper.details(car);
+    }
+
+
+    @Override
+    public CUser user(int u_id) {
         return paperMapper.user(u_id);
     }
+
 }

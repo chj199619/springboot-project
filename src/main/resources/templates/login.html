@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!--<base href="<%=basePath%>">-->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>登录</title>
+    <link th:href="@{css/login/login.css}" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+    <link th:href="@{css/login/demo.css}" rel="stylesheet" rev="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="@{js/login/jquery1.42.min.js}"></script>
+    <script type="text/javascript" th:src="@{js/login/jquery.SuperSlide.js}"></script>
+    <script type="text/javascript" th:src="@{js/login/Validform_v5.3.2_min.js}"></script>
+
+
+</head>
+<body>
+<!--<script type="text/javascript" src="js/jquery-1.12.4.js"></script>-->
+<script  type="text/javascript">
+    function check(form) {
+        if (form.username.value == "") {
+            alert("请输入用户名!");
+            form.name.focus();
+            return "login";
+        }
+        if (form.password.value == "") {
+            alert("请输入密码!");
+            form.password.focus();
+            return "login";
+        }
+    }
+    function  change() {
+        //每次告诉浏览器发送一个新的请求 不使用浏览器的缓存
+        $("#123").attr("src","/imageCodePage?"+ Math.random());
+    }
+
+</script>
+<div style="width: 100%;height: 50px;background-color: whitesmoke">
+    <h1 style="color: #ff6e40;margin-left: 100px" >Computer Home</h1>
+</div>
+<div class="header">
+
+
+    <div class="headerNav">
+        <a target="_blank" href="#">企业官网</a>
+        <a target="_blank" href="#">关于我们</a>
+        <a target="_blank" href="#">开发团队</a>
+        <a target="_blank" href="#">意见反馈</a>
+        <a target="_blank" href="#">帮助</a>
+    </div>
+</div>
+
+<div class="banner">
+
+    <div class="login-aside">
+        <div id="o-box-up"></div>
+        <div id="o-box-down"  style="table-layout:fixed;">
+            <div class="error-box"></div>
+
+            <form class="registerform" action="/denglu" method="post" name="login">
+                <div class="fm-item">
+                    <label  class="form-label">MISS系统登陆：</label>
+                    <!--<input type="text" value="输入账号" maxlength="100" id="username" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"  >-->
+                    <input type="text"  name="username" placeholder="请输入用户名" maxlength="100" id="username" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18"/>
+                    <div class="ui-form-explain"></div>
+                </div>
+
+                <div class="fm-item">
+                    <label class="form-label">登陆密码：</label>
+                    <!--<input type="password" value="" maxlength="100" id="password" class="i-text" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！">-->
+                    <input type="password"  name="password" placeholder="请输入密码"  maxlength="100" id="password" class="i-text" datatype="*6-16" nullmsg="请设置密码！" />
+                    <div class="ui-form-explain"></div>
+                </div>
+
+                <div class="fm-item pos-r">
+                    <label  class="form-label">验证码</label>
+                    <input type="text"  maxlength="100" id="yzm" name="rcodea" class="i-text yzm" placeholder="请输入验证码！" >
+                    <div class="ui-form-explain">
+                        <a href="javascript:change()" >
+                            <img id="123" src="/imageCodePage" class="yzm-img">
+                        </a>
+                    </div>
+                </div>
+                <div   style="width: auto;height: 15px;margin-left: 85px;margin-top: 10px">
+                    <span th:text="${msg}" style="color: red" ></span>
+                </div>
+
+                <div class="fm-item">
+                    <label  class="form-label"></label>
+                    <input type="submit" style="margin-left: 80px;width: 80px;height: 30px ;color: black"  value="登陆" onclick=" return check(login)" />
+                    <a href="register">注册</a>
+                    <!--<input type="submit" value="" tabindex="4" id="send-btn" class="btn-login">-->
+                    <div class="ui-form-explain"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="bd">
+        <ul>
+            <li style="background:url('/image/timg.jpg') #CCE1F3 center 0 no-repeat;background-size: cover"></li>
+            <li style="background:url('/image/timg.jpg') #BCE0FF center 0 no-repeat;background-size: cover"></li>
+        </ul>
+    </div>
+
+    <div class="hd"><ul></ul></div>
+</div>
+<script type="text/javascript">jQuery(".banner").slide({ titCell:".hd ul", mainCell:".bd ul", effect:"fold",  autoPlay:true, autoPage:true, trigger:"click" });</script>
+
+
+<div class="banner-shadow"></div>
+
+<div class="footer">
+    <p>Copyright &copy; 2014.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title=" ">XXXX</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">XXXX</a></p>
+</div>
+
+
+
+</body>
+</html>

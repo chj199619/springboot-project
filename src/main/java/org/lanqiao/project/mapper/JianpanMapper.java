@@ -1,6 +1,7 @@
 package org.lanqiao.project.mapper;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.lanqiao.project.pojo.Condition;
@@ -17,15 +18,15 @@ public interface JianpanMapper {
     public List<Goodsjianpan> getAll(Condition condition);
     //根据商品id查商品详请
     @Select("select * from goodsjianpan where id=#{id}")
-    public Goodsjianpan selectGooodsJianpanById(int id);
+    public Goodsjianpan selectGooodsJianpanById(@Param("id")int id);
     //修改库存
     @Update("update goodsjianpan set jnum = #{jnum} where id = #{id}")
-    public void updateKucun(int jnum,int id);
+    public void updateKucun(@Param("jnum") int jnum,@Param("id")  int id);
     //修改单价
-    public void updatePrice(double jlastprice,double jorgprice,int id);
+    public void updatePrice(@Param("jlastprice")double jlastprice,@Param("jorgprice")double jorgprice,@Param("id")int id);
     //上架商品
     @Insert("insert into goodsjianpan (jpicture,jname,jlastprice,jorgprice,t_type,jhiredate,jnum) values (#{jpicture},#{jname},#{jlastprice},#{jorgprice},#{t_type},#{jhiredate},#{jnum})")
     public void insertAddjian(Goodsjianpan goodsjianpan);
     //删除
-    public void deletegoodsjian(int id);
+    public void deletegoodsjian(@Param("id")int id);
 }

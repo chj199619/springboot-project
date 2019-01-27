@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.lanqiao.project.mapper.GoodsMapper">
+    <select id="selectComIN" resultType="org.lanqiao.project.pojo.Computer" parameterType="org.lanqiao.project.pojo.CDT">
+        select * from  goodscomputer
+        <where>1=1
+           <if test="begprice !=0 &amp;&amp; null !=begprice">
+                and  g_price>=#{begprice}
+           </if>
+            <if test="endprice!=0 &amp;&amp; null !=begprice">
+                and #{endprice}>=g_price
+            </if>
+        </where>
+
+    </select>
+    <select id="selectComYX" resultType="org.lanqiao.project.pojo.Computer" parameterType="org.lanqiao.project.pojo.CDT">
+        select * from  goodscomputeryx
+        <where>1=1
+            <if test="begprice !=0 &amp;&amp; null !=begprice">
+                and  g_price>=#{begprice}
+            </if>
+            <if test="endprice!=0 &amp;&amp; null !=begprice">
+                and #{endprice}>=g_price
+            </if>
+        </where>
+
+    </select>
+
+
+
+
+
+
+
+
+</mapper>

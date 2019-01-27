@@ -1,60 +1,33 @@
 package org.lanqiao.project.service;
 
 import org.lanqiao.project.mapper.UserMapper;
-import org.lanqiao.project.pojo.Condition;
+import org.lanqiao.project.pojo.CUser;
 import org.lanqiao.project.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.List;
+
 @Service
 public class UserService implements UserMapper {
     @Autowired
     UserMapper userMapper;
 
+
     @Override
-    public List<User> selectAll() {
-        List<User> userList=userMapper.selectAll();
-        return userList;
+    public List<User> selectAll1() {
+        return userMapper.selectAll1();
     }
 
     @Override
-    public User selectUserById(int u_id) {
-       return userMapper.selectUserById(u_id);
-
+    public User selectUser1(String u_name) throws SQLException {
+        return userMapper.selectUser1(u_name);
     }
 
     @Override
-    public void insertUser(User user) {
-       userMapper.insertUser(user);
+    public void addUser(User user) {
+        userMapper.addUser(user);
+
     }
-
-    @Override
-    public void updateUser( String u_password,int u_id) {
-        userMapper.updateUser(u_password,u_id);
-    }
-
-//    @Override
-//    public void updateUser(User user) {
-//        userMapper.updateUser(user);
-//    }
-
-
-    @Override
-    public void deleteUser(int u_id) {
-        userMapper.deleteUser(u_id);
-    }
-
-    @Override
-    public int getUserCount(Condition condition) {
-        return userMapper.getUserCount(condition);
-    }
-
-    @Override
-    public List<User> getAll(Condition condition) {
-        List<User> userList = userMapper.getAll(condition);
-        return userList;
-    }
-
-
 }

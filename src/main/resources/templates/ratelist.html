@@ -108,7 +108,7 @@
     <xblock>
 
         <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>-->
-        <button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>添加</button>
+        <!--<button class="layui-btn" id="layui-btn" ><i class="layui-icon"></i>添加</button>-->
         <button class="layui-btn" id="layui-btn2"><a href="/rate.do" style="text-decoration-line: none;color: white">重置</a></button>
 
 
@@ -117,10 +117,10 @@
         <thead>
         <tr>
             <th>评论编号</th>
-            <th>用户名</th>
-            <th>订单编号</th>
+            <!--<th>用户名</th>-->
+            <!--<th>订单编号</th>-->
             <th>商品名称</th>
-            <th>商品类型</th>
+            <!--<th>商品类型</th>-->
             <th>评价内容</th>
             <th>评论回复</th>
             <th>操作</th>
@@ -129,10 +129,10 @@
         <tbody>
         <tr th:each="rate:${rateList}" >
             <td>[[${rate.rate_id}]]</td>
-            <td>[[${rate.u_name}]]</td>
-            <td>[[${rate.o_id}]]</td>
+            <!--<td>[[${rate.u_name}]]</td>-->
+            <!--<td>[[${rate.o_id}]]</td>-->
             <td>[[${rate.g_name}]]</td>
-            <td>[[${rate.t_type}]]</td>
+            <!--<td>[[${rate.t_type}]]</td>-->
             <td>[[${rate.news}]]</td>
             <td>[[${rate.answernews}]]</td>
             <td class="td-manage">

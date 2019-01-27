@@ -19,10 +19,10 @@
     <tbody>
     <!--遍历购物车列表-->
     <tr th:each="paper:${papers}">
-        <td th:text="${paper.c_num}"></td>
+        <td th:text="${paper.g_id}"></td>
         <td><img  style="width: 45px;height: 45px" th:src="${paper.g_img}"></td>
         <td th:text="${paper.g_name}"></td>
-        <td th:text="${paper.c_price}"></td>
+        <td th:text="${paper.g_price}"></td>
     </tr>
     </tbody>
 </table>

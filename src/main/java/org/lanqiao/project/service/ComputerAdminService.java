@@ -3,7 +3,6 @@ package org.lanqiao.project.service;
 import org.lanqiao.project.mapper.ComputerAdminMapper;
 import org.lanqiao.project.pojo.Condition;
 import org.lanqiao.project.pojo.Goodscomput;
-import org.lanqiao.project.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

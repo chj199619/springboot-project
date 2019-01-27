@@ -1,8 +1,10 @@
 package org.lanqiao.project.controller;
 
 import com.alibaba.fastjson.JSON;
+
+import org.apache.ibatis.annotations.Param;
 import org.lanqiao.project.pojo.PsPaper;
-import org.lanqiao.project.pojo.User;
+import org.lanqiao.project.pojo.CUser;
 import org.lanqiao.project.pojo.psCar;
 import org.lanqiao.project.service.PsPaperService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +27,27 @@ import static java.lang.System.out;
 public class psUserController {
     @Autowired
     PsPaperService paperService;
+
     @RequestMapping("order-list.html")
     public String bb(Model model){
         List<PsPaper>papers = this.getAll(model);
         return "order-list";
     }
-
+    @RequestMapping("order-view.html")
+    public String orderview(){
+        return "order-view";
+    }
     @RequestMapping("conditions")
-    public String conditions(HttpServletRequest req, HttpServletResponse resp,String pscondition,Model model,String id) throws IOException {
-
+    public String conditions(HttpServletRequest req, HttpServletResponse resp,String pscondition,Model model,String id,String uid,String ddid) throws IOException {
+        out.println("--------"+uid);
+        out.println("--------"+ddid);
         out.println(id+"---"+pscondition);
         out.println(pscondition);
-        Integer pid = Integer.parseInt(id);
-        paperService.update(new PsPaper(pid,pscondition));
+        Integer ppid = Integer.parseInt(id);
+        Integer pid = Integer.parseInt(ddid);
+        Integer uuid = Integer.parseInt(uid);
+        paperService.update(pscondition,ppid);
+        paperService.UpdateCar(pscondition,uuid,pid);
         List<PsPaper>papers = this.getAll(model);
         return "order-list";
     }
@@ -76,7 +86,8 @@ public class psUserController {
     }
 
     @RequestMapping("psupd.html")
-    public void psupd(HttpServletRequest req, HttpServletResponse resp,String id,String pscondition) throws IOException {
+    public void psupd(HttpServletRequest req, HttpServletResponse resp,String id,String pscondition,String u_id) throws IOException {
+        out.println("****************"+u_id);
         resp.setCharacterEncoding("utf-8");
         resp.setContentType("text/json");
         PrintWriter out = resp.getWriter();
@@ -124,18 +135,24 @@ public class psUserController {
     public String detai(HttpServletRequest req,Model model){
         String ddid =req.getParameter("ddid");
         String uid = req.getParameter("uid");
-        out.println(ddid+"--"+uid);
+        String cond = req.getParameter("cond");
+        out.println(ddid+"--"+uid+"--"+cond);
         int did = Integer.parseInt(ddid);
         int u_id = Integer.parseInt(uid);
-        User user = (User) paperService.user(u_id);
+        CUser user = (CUser) paperService.user(u_id);
         out.println(user);
         String name ="暂无数据";
-        String phone ="13612536987";
+        String phone ="暂无数据";
         if (user!=null){
             name = user.getU_name();
             phone= user.getU_phone();
         }
-        List<psCar> papers= paperService.details(did,u_id);
+        psCar car = new psCar(did,u_id,cond);
+        out.println(car.getP_id()+"--"+
+        car.getU_id()+
+        car.getCond()
+        );
+        List<psCar> papers= paperService.details(car);
         out.println(papers);
         model.addAttribute("name",name);
         model.addAttribute("phone",phone);

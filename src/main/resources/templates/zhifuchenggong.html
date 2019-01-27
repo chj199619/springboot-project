@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="http://how2j.cn/study/js/jquery/2.0.0/jquery.min.js"></script>
+    <link href="http://how2j.cn/study/css/bootstrap/3.3.6/bootstrap.min.css" rel="stylesheet">
+    <script src="http://how2j.cn/study/js/bootstrap/3.3.6/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="payedDiv" style="border: 50px;margin-left:350px;margin-top:80px">
+    <div class="payedTextDiv" >
+        <img src="http://how2j.cn/tmall/img/site/paySuccess.png">
+        <span style="font-weight:bold;font-size:20px;">您已成功付款</span>
+    </div><br>
+    <div class="payedAddressInfo">
+        <ul  th:each="person:${persons}" style="font-size:16px">
+            <li style="margin-top:28px">地址： [[${person.u_address}]]</li>
+            <li>待付款：<span class="payedInfoPrice">
+                ￥[[${total}]]
+                </span>
+                实付款：<span class="payedInfoPrice">
+                ￥[[${total}]]
+                </span>
+            </li>
+            <li>预计01月29日送达</li>
+        </ul>
+        <div class="paedCheckLinkDiv" style="border:30px;margin-left: 40px">
+            您可以
+            <a th:href="@{/daifahuo}" class="payedCheckLink">查看已买到的商品</a>
+            <a th:href="@{/index}" class="payedCheckLink">返回首页 </a>
+        </div>
+    </div>
+
+    <div class="warningDiv" style="margin-top: 20px">
+        <img src="http://how2j.cn/tmall/img/site/warning.png">
+        <b style="color:red">安全提醒：</b><span class="redColor boldWord" style="color:red;font-size:12px">下单后，用QQ给您发送链接办理退款的都是骗子！supermarket不存在系统升级，订单异常等问题，谨防假冒客服电话诈骗！</span>
+    </div>
+</div>
+</body>
+</html>

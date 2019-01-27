@@ -2,9 +2,7 @@ package org.lanqiao.project.controller;
 
 import com.alibaba.fastjson.JSON;
 import org.lanqiao.project.pojo.Condition;
-import org.lanqiao.project.pojo.Goodscomput;
 import org.lanqiao.project.pojo.Type;
-import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.service.TypeService;
 import org.lanqiao.project.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.lanqiao.project.pojo.Manager;
-import org.lanqiao.project.pojo.User;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

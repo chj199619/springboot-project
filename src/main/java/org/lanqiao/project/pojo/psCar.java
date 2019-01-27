@@ -5,30 +5,48 @@ public class psCar {
     private String g_img;
     private String g_name;
     private String g_color;
-    private double c_price;
+    private double g_price;
     private int c_num;
     private int u_id;
     private int p_id;
+    private String cond;
 
-    public psCar(int g_id, String g_img, String g_name, String g_color, double c_price, int c_num, int u_id, int p_id) {
+    public psCar() {
+    }
+
+    public psCar(int p_id, int u_id, String cond) {
+        this.p_id = p_id;
+        this.u_id = u_id;
+        this.cond = cond;
+    }
+
+    public psCar(int g_id, String g_img, String g_name, String g_color, double g_price, int c_num, int u_id, int p_id) {
         this.g_id = g_id;
         this.g_img = g_img;
         this.g_name = g_name;
         this.g_color = g_color;
-        this.c_price = c_price;
+        this.g_price = g_price;
         this.c_num = c_num;
         this.u_id = u_id;
         this.p_id = p_id;
     }
 
-    public psCar(String g_img, String g_name, String g_color, double c_price, int c_num, int u_id, int p_id) {
+    public psCar(String g_img, String g_name, String g_color, double g_price, int c_num, int u_id, int p_id) {
         this.g_img = g_img;
         this.g_name = g_name;
         this.g_color = g_color;
-        this.c_price = c_price;
+        this.g_price = g_price;
         this.c_num = c_num;
         this.u_id = u_id;
         this.p_id = p_id;
+    }
+
+    public String getCond() {
+        return cond;
+    }
+
+    public void setCond(String cond) {
+        this.cond = cond;
     }
 
     public int getG_id() {
@@ -63,12 +81,12 @@ public class psCar {
         this.g_color = g_color;
     }
 
-    public double getC_price() {
-        return c_price;
+    public double getG_price() {
+        return g_price;
     }
 
-    public void setC_price(double c_price) {
-        this.c_price = c_price;
+    public void setG_price(double g_price) {
+        this.g_price = g_price;
     }
 
     public int getC_num() {
@@ -102,7 +120,7 @@ public class psCar {
                 ", g_img='" + g_img + '\'' +
                 ", g_name='" + g_name + '\'' +
                 ", g_color='" + g_color + '\'' +
-                ", c_price=" + c_price +
+                ", g_price=" + g_price +
                 ", c_num=" + c_num +
                 ", u_id=" + u_id +
                 ", p_id=" + p_id +

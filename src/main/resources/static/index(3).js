@@ -1,0 +1,1 @@
+S=KISSY,KISSY.config("modules",{util:{alias:"kg/kmd-adapter/0.1.5/util"},feature:{alias:"kg/kmd-adapter/0.1.5/feature"},"event-dom":{alias:"event"},"event-custom":{alias:"event"},"event-gesture":{alias:"event"}}),define=function(e,a,t){return KISSY.add(e,a,function(e,a,n,i){t(a,n,i)})};

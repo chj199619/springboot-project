@@ -1,0 +1,1612 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    
+    <!-- Basic page needs
+    ============================================ -->
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="Magentech">
+    <meta name="robots" content="index, follow" />
+   
+    <!-- Mobile specific metas
+    ============================================ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- Favicon
+    ============================================ -->
+    <link rel="shortcut icon" type="image/png" href="/ico/favicon-16x16.png">
+  
+   
+    <!-- Libs CSS
+    ============================================ -->
+    <link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+    <link href="/css/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/js/datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="/js/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="/css/themecss/lib.css" rel="stylesheet">
+    <link href="/js/jquery-ui/jquery-ui.min.css" rel="stylesheet">
+    <link href="/js/minicolors/miniColors.css" rel="stylesheet">
+    
+    <!-- Theme CSS
+    ============================================ -->
+    <link href="/css/themecss/so_searchpro.css" rel="stylesheet">
+    <link href="/css/themecss/so_megamenu.css" rel="stylesheet">
+    <link href="/css/themecss/so-categories.css" rel="stylesheet">
+    <link href="/css/themecss/so-listing-tabs.css" rel="stylesheet">
+    <link href="/css/themecss/so-category-slider.css" rel="stylesheet">
+    <link href="/css/themecss/so-newletter-popup.css" rel="stylesheet">
+
+    <link href="/css/footer/footer1.css" rel="stylesheet">
+    <link href="/css/header/header1.css" rel="stylesheet">
+    <link id="color_scheme" href="/css/theme.css" rel="stylesheet">
+    <link href="/css/responsive.css" rel="stylesheet">
+
+     <!-- Google web fonts
+    ============================================ -->
+    <link href='https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' rel='stylesheet' type='text/css'>     
+    <style type="text/css">
+         body{font-family:'Poppins', sans-serif;}
+    </style>
+
+</head>
+
+<body class="res layout-subpage layout-1 banners-effect-5">
+
+    <div id="wrapper" class="wrapper-fluid">
+        <!-- Header Container  -->
+        <header id="header" class=" typeheader-1">
+
+            <!-- Header Top -->
+            <div class="header-top hidden-compact">
+                <div class="container">
+                    <div class="row">
+                        <div class="header-top-left col-lg-7 col-md-8 col-sm-6 col-xs-4">
+                            <div class="hidden-md hidden-sm hidden-xs welcome-msg">欢迎来到电脑之家！！<span>Happy2019</span> </div>
+
+                        </div>
+                        <div class="header-top-right collapsed-block col-lg-5 col-md-4 col-sm-6 col-xs-8">
+                            <ul class="top-link list-inline lang-curr">
+                                <li class="currency">
+                                    <div class="btn-group currencies-block">
+                                        <form action="index.html" method="post" enctype="multipart/form-data" id="currency">
+                                            <a href="#" title="My Account " class="btn-xs dropdown-toggle" data-toggle="dropdown"> <span class="">我的意见</span>  <span class="fa fa-caret-down"></span>
+                                            </a>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li th:if="${#strings.isEmpty(session.uname)}" class="log login">
+
+                                </li>
+                                <li th:if="${!#strings.isEmpty(session.uname)}">
+                                    <a th:href="@{/dingdan}"> 我的信息 <span class="fa fa-caret-down"></span></a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- //Header Top -->
+
+            <!-- Header center -->
+
+            <div class="header-middle">
+                <div class="container">
+                    <div class="row">
+                        <!-- Logo -->
+                        <div class="navbar-logo col-lg-2 col-md-3 col-sm-4 col-xs-12">
+                            <div class="logo"><a href="index.html"><img src="/image/catalog/logo.png" title="Your Store" alt="Your Store" /></a></div>
+                        </div>
+                        <!-- //end Logo -->
+
+
+                        <!-- Search -->
+                        <div class="col-lg-7 col-md-6 col-sm-5">
+                            <div class="search-header-w">
+                                <div class="icon-search hidden-lg hidden-md hidden-sm"><i class="fa fa-search"></i></div>
+
+                                <div id="sosearchpro" class="sosearchpro-wrapper so-search ">
+                                    <form method="GET" action="index.html">
+                                        <div id="search0" class="search input-group form-group">
+                                            <div class="select_category filter_type  icon-select hidden-sm hidden-xs">
+                                                <select class="no-border" name="category_id">
+                                                    <option value="0">全部类型</option>
+                                                    <option value="78">外设</option>
+                                                    <option value="77">固态硬盘</option>
+                                                    <option value="82">小米电脑</option>
+                                                    <option value="80">路由器</option>
+                                                    <option value="81"> iPad</option>
+                                                    <option value="79">显示器</option>
+
+                                                </select>
+                                            </div>
+
+                                            <input class="autosearch-input form-control" type="text" value="" size="50" autocomplete="off" placeholder="搜你想搜的" name="search">
+
+                                            <button type="submit" class="button-search btn btn-primary" name="submit_search"><i class="fa fa-search"></i></button>
+
+                                        </div>
+                                        <input type="hidden" name="route" value="product/search" />
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- //end Search -->
+                        <div class="middle-right col-lg-3 col-md-3 col-sm-3">
+                            <!--cart-->
+                            <div class="shopping_cart">
+                                <div id="cart" class="btn-shopping-cart">
+                                    <ul>
+                                        <li th:if="${#strings.isEmpty(session.uname)}">
+                                            <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                <div class="shopcart">
+                                        <span class="icon-c">
+                                <i class="fa fa-shopping-bag"></i>
+                                        </span>
+                                                    <div class="shopcart-inner">
+                                                        <p class="text-shopping-cart">
+
+                                                            购物车
+                                                        </p>
+
+
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                                请先登录哦
+
+                                            </ul>
+                                        </li>
+                                        </li>
+                                        <li th:if="${!#strings.isEmpty(session.uname)}">
+                                            <a data-loading-text="Loading... " class="btn-group top_cart dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                                <div class="shopcart">
+                                        <span class="icon-c">
+                                <i class="fa fa-shopping-bag"></i>
+                                        </span>
+                                                    <div class="shopcart-inner">
+                                                        <p class="text-shopping-cart">
+
+                                                            购物车
+                                                        </p>
+
+                                                        <span class="total-shopping-cart cart-total-full">
+                                   <span class="items_cart" th:text="${carsize}">0</span><span class="items_cart2"> item(s)</span><span class="items_carts" th:text="${total}"></span>
+                                            </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+
+                                            <ul class="dropdown-menu pull-right shoppingcart-box" role="menu">
+                                                <li>
+                                                    <table class="table table-striped">
+                                                        <tbody>
+                                                        <tr th:each="cars:${car}">
+                                                            <td class="text-center" style="width:70px" >
+                                                                <a href="product.html">
+                                                                    <img th:src="${cars.g_img}" style="width:70px" alt="Yutculpa ullamcon" title="Yutculpa ullamco" class="preview">
+                                                                </a>
+                                                            </td>
+                                                            <td class="text-left"> <a class="cart_product_name" href="product.html" th:text="${cars.g_name}"></a>
+                                                            </td>
+                                                            <td class="text-center" th:text="x+${cars.g_price}"></td>
+                                                            <td class="text-center" th:text="'￥'+${cars.g_price}"></td>
+                                                            <td class="text-right">
+                                                                <a href="product.html" class="fa fa-edit"></a>
+                                                            </td>
+                                                            <td class="text-right">
+                                                                <a onclick="cart.remove('2');" class="fa fa-times fa-delete"></a>
+                                                            </td>
+                                                        </tr>
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </li>
+                                                <li>
+                                                    <div>
+
+                                                        <p class="text-right"> <a class="btn view-cart" th:href="@{/cart}"><i class="fa fa-shopping-cart"></i>查看购物车</a>&nbsp;&nbsp;&nbsp; <a class="btn btn-mega checkout-cart" href="#"><i class="fa fa-share"></i>去结算</a>
+                                                        </p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+                            <!--//cart-->
+
+                            <ul class="wishlist-comp hidden-md hidden-sm hidden-xs">
+                                <li class="compare hidden-xs"><a href="index" class="top-link-compare" title="刷新 "><i class="fa fa-refresh"></i></a>
+                                </li>
+                                <li class="wishlist hidden-xs"><a href="#" id="wishlist-total" class="top-link-wishlist" title="愿望清单(0) "><i class="fa fa-heart"></i></a>
+                                </li>
+                            </ul>
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- //Header center -->
+
+            <!-- Header Bottom -->
+            <div class="header-bottom hidden-compact">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="bottom1 menu-vertical col-lg-2 col-md-3 col-sm-3">
+                            <div class="responsive so-megamenu megamenu-style-dev ">
+                                <div class="so-vertical-menu ">
+                                    <nav class="navbar-default">
+
+                                        <div class="container-megamenu vertical">
+                                            <div id="menuHeading">
+                                                <div class="megamenuToogle-wrapper">
+                                                    <div class="megamenuToogle-pattern">
+                                                        <div class="container">
+                                                            <div>
+                                                                <span></span>
+                                                                <span></span>
+                                                                <span></span>
+                                                            </div>
+                                                            全部商品分类
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="navbar-header">
+                                                <button type="button" id="show-verticalmenu" data-toggle="collapse" class="navbar-toggle">
+                                                    <i class="fa fa-bars"></i>
+                                                    <span>  全部商品分类     </span>
+                                                </button>
+                                            </div>
+                                            <div class="vertical-wrapper" >
+                                                <span id="remove-verticalmenu" class="fa fa-times"></span>
+                                                <div class="megamenu-pattern">
+                                                    <div class="container-mega">
+                                                        <ul class="megamenu" style="background: rgb(51, 51, 51)">
+                                                            <li class="second-item item-vertical  with-sub-menu hover" style="background: rgb(52, 51, 51);">
+                                                                <em class="split-line" style="background: rgb(68, 68, 68);"></em>
+                                                                <a class="second-item-title clearfix" th:href="@{/category(beprice='0',endprice='60000')}" target="_blank" style="cursor: pointer; color: rgb(255, 255, 255);">电脑整机
+                                                                    <p class="second-item-list" style="margin-bottom: 0px">
+<span class="info-wrap clearfix">
+<a class="hot" data-high="#ff6617" th:href="@{/categoryyx(beprice='0',endprice='60000')}" target="_blank" name="pindao_diannao_42212715284_word02" style="color: rgb(255, 102, 23);">笔记本 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" th:href="@{/categoryyx(beprice='0',endprice='60000')}" target="_blank" name="pindao_diannao_42212715284_word03" style="color: rgb(255, 255, 255);">轻薄本 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" th:href="@{/categoryyx(beprice='0',endprice='60000')}" target="_blank" name="pindao_diannao_42212715284_word04" style="color: rgb(255, 255, 255);">游戏本 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" th:href="@{/categoryyx(beprice='0',endprice='60000')}" target="_blank" name="pindao_diannao_42212715284_word05" style="color: rgb(255, 255, 255);">平板电脑 &nbsp;</a><i>\</i>
+<a class="hot" data-high="#ff6617" th:href="@{/category(beprice='0',endprice='60000')}" target="_blank" name="pindao_diannao_42212715284_word06" style="color: rgb(255, 102, 23);">台式电脑</a>
+</span>
+                                                                    </p>
+
+
+                                                                    <p class="close-menu"></p>
+                                                                </a>
+
+                                                                <div class="sub-menu" data-subwidth="60"  >
+                                                                    <div class="content" >
+                                                                        <div class="row">
+                                                                            <div class="col-sm-12">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-4 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li>
+                                                                                                    <a th:href="@{/categoryyx(beprice='0',endprice='60000')}"  class="main-menu">笔记本</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#" >华硕</a></li>
+                                                                                                        <li><a href="#" >机械革命</a></li>
+                                                                                                        <li><a  href="#" >联想</a></li>
+                                                                                                        <li><a href="#" >戴尔</a></li>
+                                                                                                        <li><a href="#" >i7</a></li>
+                                                                                                        <li><a href="#" >独立显卡</a></li>
+                                                                                                    </ul>
+                                                                                                </li>
+
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li>
+                                                                                                    <a th:href="@{/category(beprice='0',endprice='60000')}"  class="main-menu">台式电脑</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#" >联想</a></li>
+                                                                                                        <li><a href="#" >戴尔</a></li>
+                                                                                                        <li><a href="#" >清华同方</a></li>
+                                                                                                        <li><a href="#" >21英寸</a></li>
+                                                                                                        <li><a href="#" >三星</a></li>
+
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-4 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li>
+                                                                                                    <a href="#"  class="main-menu">平板电脑</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#" >iPad</a></li>
+                                                                                                        <li><a href="#" >华为</a></li>
+                                                                                                        <li><a href="#" >二合一</a></li>
+                                                                                                        <li><a href="#" >9.7英寸</a></li>
+
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="second-item item-vertical  style1 with-sub-menu hover"style="background: rgb(51, 51, 51);">
+                                                                <hr>
+                                                                <p class="close-menu"></p>
+                                                                <em class="split-line" style="background: rgb(68, 68, 68);"></em>
+                                                                <a href="#" class="clearfix second-item-title "style="cursor: pointer; color: rgb(255, 255, 255);">
+                                                                    DIY硬件
+                                                                    <span class="label"></span>
+                                                                    <span>
+                                                            <p class="second-item-list">
+<span class="info-wrap clearfix">
+<a class="normal hover" data-high="" href="https://list.suning.com/0-258011-0.html" target="_blank" name="pindao_diannao_42212715285_word02" style="color: rgb(255, 255, 255);">显示器 &nbsp;</a><i>\</i>
+<a class="hot" data-high="#ff6617" href="https://list.suning.com/0-221503-0.html" target="_blank" name="pindao_diannao_42212715285_word03" style="color: rgb(255, 102, 23);">CPU &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-186001-0.html" target="_blank" name="pindao_diannao_42212715285_word04" style="color: rgb(255, 255, 255);">主板 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-186002-0.html" target="_blank" name="pindao_diannao_42212715285_word05" style="color: rgb(255, 255, 255);">显卡 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-186008-0.html" target="_blank" name="pindao_diannao_42212715285_word06" style="color: rgb(255, 255, 255);">硬盘 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-169502-0.html" target="_blank" name="pindao_diannao_42212715285_word07" style="color: rgb(255, 255, 255);">内存 &nbsp;</a>
+</span>
+                                                            </p>
+                                                                </span>
+
+
+                                                                </a>
+                                                                <div class="sub-menu" data-subwidth="40" >
+                                                                    <div class="content">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li><a href="#" class="main-menu">显示器</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">三星</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">AOC</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">26-30英寸</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">LG</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">IPS面板</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                                <li><a href="#" class="main-menu">显卡</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">华硕</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">GTX1080Ti</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">七彩虹</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">技嘉</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li><a href="#" class="main-menu">硬盘</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">SSD固态硬盘</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">西部数据</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">希捷</a>
+                                                                                                        </li>
+
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                                <li><a href="#" class="main-menu">内存</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">金士顿</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">三星</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">台式机内存</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">8GB</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="second-item item-vertical  style1 with-sub-menu hover"style="background: rgb(51, 51, 51);">
+                                                                <hr>
+                                                                <p class="close-menu"></p>
+                                                                <em class="split-line" style="background: rgb(68, 68, 68);"></em>
+                                                                <a href="#" class="clearfix second-item-title "style="cursor: pointer; color: rgb(255, 255, 255);">
+                                                                    外设附件
+                                                                    <span class="label"></span>
+                                                                    <span>
+                                                        <p class="second-item-list">
+<span class="info-wrap clearfix">
+<a class="normal" data-high="" href="https://list.suning.com/0-157250-0.html" target="_blank" name="pindao_diannao_42212715286_word02" style="color: rgb(255, 255, 255);">鼠标&nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-157244-0.html" target="_blank" name="pindao_diannao_42212715286_word03" style="color: rgb(255, 255, 255);">键盘&nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-157241-0.html" target="_blank" name="pindao_diannao_42212715286_word04" style="color: rgb(255, 255, 255);">电脑包&nbsp;</a><i>\</i>
+<a class="hot" data-high="#ff6617" href="https://list.suning.com/0-157252-0.html" target="_blank" name="pindao_diannao_42212715286_word05" style="color: rgb(255, 102, 23);">移动硬盘&nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-157162-0.html" target="_blank" name="pindao_diannao_42212715286_word06" style="color: rgb(255, 255, 255);">路由器&nbsp;</a><i>\</i>
+</span>
+                                                            </p>
+                                                                </span>
+
+
+                                                                </a>
+                                                                <div class="sub-menu" data-subwidth="40" >
+                                                                    <div class="content">
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li><a href="#" class="main-menu">鼠标</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">罗技</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">雷蛇</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">无线</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">竞技</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">小米</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                                <li><a href="#" class="main-menu">键盘</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">机械键盘</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">青轴</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">达尔优</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">吉选</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12 static-menu">
+                                                                                        <div class="menu">
+                                                                                            <ul>
+                                                                                                <li><a href="#" class="main-menu">路由器</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">无线路由</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">小米</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">腾达</a>
+                                                                                                        </li>
+
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                                <li><a href="#" class="main-menu">移动硬盘</a>
+                                                                                                    <ul>
+                                                                                                        <li><a href="#">西部数据</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">希捷</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">2TB</a>
+                                                                                                        </li>
+                                                                                                        <li><a href="#">USB</a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li class="second-item" style="background: rgb(51, 51, 51);">
+                                                                <hr>
+                                                                <em class="split-line" style="background: rgb(68, 68, 68);"></em>
+                                                                <a class="second-item-title" href="https://list.suning.com/0-157123-0.html" target="_blank" style="cursor: pointer; color: rgb(255, 255, 255);">办公打印</a>
+                                                                <p class="second-item-list">
+<span class="info-wrap clearfix">
+<a class="normal" data-high="" href="https://list.suning.com/0-157127-0.html" target="_blank" name="pindao_diannao_42212715287_word02" style="color: rgb(255, 255, 255);">打印机 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-157124-0.html" target="_blank" name="pindao_diannao_42212715287_word03" style="color: rgb(255, 255, 255);">投影仪 &nbsp;</a><i>\</i>
+<a class="hot" data-high="#ff6617" href="https://list.suning.com/0-157126-0.html" target="_blank" name="pindao_diannao_42212715287_word04" style="color: rgb(255, 102, 0);">一体机 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-157132-0.html" target="_blank" name="pindao_diannao_42212715287_word05" style="color: rgb(255, 255, 255);">扫描仪 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-178508-0.html" target="_blank" name="pindao_diannao_42212715287_word06" style="color: rgb(255, 255, 255);">复印纸 &nbsp;</a><i>\</i>
+<a class="normal" data-high="" href="https://list.suning.com/0-157133-0.html" target="_blank" name="pindao_diannao_42212715287_word07" style="color: rgb(255, 255, 255);">文具 &nbsp;</a>
+</span>
+                                                                </p>
+                                                            </li>
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </nav>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Main menu -->
+                        <div class="main-menu-w col-lg-10 col-md-9">
+                            <div class="responsive so-megamenu megamenu-style-dev">
+                                <nav class="navbar-default">
+                                    <div class=" container-megamenu  horizontal open ">
+                                        <div class="navbar-header">
+                                            <button type="button" id="show-megamenu" data-toggle="collapse" class="navbar-toggle">
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                        </div>
+
+                                        <div class="megamenu-wrapper">
+                                            <span id="remove-megamenu" class="fa fa-times"></span>
+                                            <div class="megamenu-pattern">
+                                                <div class="container-mega">
+                                                    <ul class="megamenu" data-transition="slide" data-animationtime="250">
+                                                        <li class="home hover">
+                                                            <a th:href="@{/index}">Home <b class="caret"></b></a>
+                                                            <div class="sub-menu" style="width:100%;" >
+
+                                                            </div>
+                                                        </li>
+                                                        <li class="with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <strong>电竞馆</strong>
+                                                                <img class="label-hot" src="/image/catalog/menu/new-icon.png" alt="icon items">
+                                                                <b class="caret"></b>
+                                                            </a>
+                                                            <div class="sub-menu" style="width: 100%; right: auto;">
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                        <div class="col-md-4 img img1">
+                                                                            <a href="#"><img src="https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i4/1085315961/O1CN01VuIKoH1tuBQKrk1hh_!!1085315961.jpg_430x430q90.jpg" alt="banner1"></a>
+                                                                        </div>
+                                                                        <div class="col-md-4 img img2">
+                                                                            <a href="#"><img src="https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i3/1085315961/O1CN01Vsi7d81tuBQMOtI7l_!!1085315961.jpg_430x430q90.jpg" alt="banner2"></a>
+                                                                        </div>
+                                                                        <div class="col-md-4 img img3">
+                                                                            <a href="#"><img src="https://img.alicdn.com/imgextra/https://img.alicdn.com/imgextra/i1/1085315961/O1CN01ZT2Lok1tuBQKtAi55_!!1085315961.jpg_430x430q90.jpg" alt="banner3"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div class="column">
+                                                                                <a href="#" class="title-submenu">雷蛇</a>
+                                                                                <div>
+                                                                                    <ul class="row-list">
+                                                                                        <li><a href="category.html">雷蛇（Razer）</a></li>
+                                                                                        <li><a href="#">曼巴眼镜蛇</a></li>
+                                                                                        <li><a href="#"> 影鲛终极版</a></li>
+                                                                                    </ul>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="column">
+                                                                                <a href="#" class="title-submenu">游戏鼠标</a>
+                                                                                <div>
+                                                                                    <ul class="row-list">
+                                                                                        <li><a href="product.html">罗技（Logitech）G903</a></li>
+                                                                                        <li><a href="#">机械师 鼠标大玩家-M1</a></li>
+                                                                                        <!-- <li><a href="product-v3.html">Image size - small</a></li> -->
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="column">
+                                                                                <a href="#" class="title-submenu">游戏键盘</a>
+                                                                                <div>
+                                                                                    <ul class="row-list">
+                                                                                        <li><a href="#">金士顿（Kingston）HyperX Alloy</a></li>
+                                                                                        <li><a href="#">雷神红蜘蛛机K75R </a></li>
+                                                                                        <li><a href="#">炽魂 Blasoul 焱Y520</a></li>
+                                                                                        <li><a href="#">樱桃（Cherry）机械键盘</a></li>
+
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <strong>女神馆</strong>
+                                                                <b class="caret"></b>
+                                                            </a>
+                                                            <div class="sub-menu" style="width: 100%; right: auto;">
+                                                                <div class="content" >
+                                                                    <div class="row">
+                                                                        <div class="col-md-4 img img1">
+                                                                            <a href="#"><img src="//image5.suning.cn/uimg/cms/img/154034781852452808.png" alt="banner1"></a>
+                                                                        </div>
+                                                                        <div class="col-md-4 img img2">
+                                                                            <a href="#"><img src="//image3.suning.cn/uimg/cms/img/154034783488041657.jpg" alt="banner2"></a>
+                                                                        </div>
+                                                                        <div class="col-md-4 img img3">
+                                                                            <a href="#"><img src="//image2.suning.cn/uimg/cms/img/154034784992672637.jpg" alt="banner3"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <div class="column">
+                                                                                <a href="#" class="title-submenu">精致生活</a>
+                                                                                <div>
+                                                                                    <ul class="row-list">
+                                                                                        <li><a href="category.html">极致轻薄</a></li>
+                                                                                        <li><a href="#">无线连接</a></li>
+                                                                                        <li><a href="#"> 时尚颜控</a></li>
+                                                                                    </ul>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="column">
+                                                                                <a href="#" class="title-submenu">花容月貌</a>
+                                                                                <div>
+                                                                                    <ul class="row-list">
+                                                                                        <li><a href="product.html">小新Air</a></li>
+                                                                                        <li><a href="#">联想锋芒</a></li>
+                                                                                        <li><a href="#">Surface GO</a></li>
+
+                                                                                        <!-- <li><a href="product-v3.html">Image size - small</a></li> -->
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <div class="column">
+                                                                                <a href="#" class="title-submenu">天生丽质</a>
+                                                                                <div>
+                                                                                    <ul class="row-list">
+                                                                                        <li><a href="#">惠普ENVY</a></li>
+                                                                                        <li><a href="#">联想ThinkPad</a></li>
+                                                                                        <li><a href="#">戴尔灵越燃</a></li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="with-sub-menu hover">
+                                                            <p class="close-menu"></p>
+                                                            <a href="#" class="clearfix">
+                                                                <strong>学生惠</strong>
+                                                                <img class="label-hot" src="/image/catalog/menu/hot-icon.png" alt="icon items">
+
+                                                                <b class="caret"></b>
+                                                            </a>
+                                                            <div class="sub-menu" style="width: 100%; display: none;">
+                                                                <div class="content">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="row">
+                                                                                <div class="col-md-4 img img1">
+                                                                                    <a href="#"><img src="/image/catalog/menu/megabanner/image-1.jpg" alt="banner1"></a>
+                                                                                </div>
+                                                                                <div class="col-md-4 img img2">
+                                                                                    <a href="#"><img src="/image/catalog/menu/megabanner/image-2.jpg" alt="banner2"></a>
+                                                                                </div>
+                                                                                <div class="col-md-4 img img3">
+                                                                                    <a href="#"><img src="/image/catalog/menu/megabanner/image-3.jpg" alt="banner3"></a>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-md-4">
+                                                                            <a href="#" class="title-submenu">超高性价比</a>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 hover-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li><a href="#"  class="main-menu">小米Air</a></li>
+                                                                                            <li><a href="#"  class="main-menu">华硕灵耀</a></li>
+                                                                                            <li><a href="#"  class="main-menu">惠普星系列</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <a href="#" class="title-submenu">校园足迹</a>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 hover-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li><a href="#"  class="main-menu">惠普M1136打印机</a></li>
+                                                                                            <li><a href="#"  class="main-menu">小米便携无线鼠标</a></li>
+                                                                                            <li><a href="#"  class="main-menu">金士顿U盘</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-4">
+                                                                            <a href="#" class="title-submenu">学生板</a>
+                                                                            <div class="row">
+                                                                                <div class="col-md-12 hover-menu">
+                                                                                    <div class="menu">
+                                                                                        <ul>
+                                                                                            <li><a href="#"  class="main-menu">Apple iPad</a></li>
+                                                                                            <li><a href="#"  class="main-menu">华为荣耀平板</a></li>
+                                                                                            <li><a href="#"  class="main-menu">Kindle阅读器</a></li>
+                                                                                        </ul>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+
+
+
+                                                    </ul>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <!-- //end Main menu -->
+
+                        <div class="bottom3">
+                            <div class="telephone hidden-xs hidden-sm hidden-md">
+                                <ul class="blank">
+                                    <li><a href="#"><i class="fa fa-truck"></i>track your order</a></li>
+                                    <li><a href="#"><i class="fa fa-phone-square"></i>客服热线： (+123)4 567 890</a></li>
+                                </ul>
+                            </div>
+                            <div class="signin-w hidden-md hidden-sm hidden-xs">
+                                <ul class="signin-link blank">
+                                    <li th:if="${#strings.isEmpty(session.uname)}" class="log login"><i class="fa fa-lock"></i>
+                                        <a  class="link-lg" href="login">登陆 </a>
+                                        or <a href="register">注册</a></li>
+
+                                    <li th:if="${!#strings.isEmpty(session.uname)}"> <a  th:text="${'欢迎您：'+session.uname+'!'}" ></a>
+                                        <a href="/">注销</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </header>
+        <!-- //Header Container  -->
+
+	<!-- Main Container  -->
+	<div class="main-container container">
+		<ul class="breadcrumb">
+			<li><a href="#"><i class="fa fa-home"></i></a></li>
+			<li><a href="#" th:each="comp:${cominfo}" th:text="${comp.g_name}"></a></li>
+			
+		</ul>
+		
+		<div class="row">
+	
+			<!--Left Part Start -->
+			<aside class="col-sm-4 col-md-3 content-aside" id="column-left">
+
+
+
+            </aside>
+            <!--Left Part End -->
+
+			<!--Middle Part Start-->
+			<div id="content" class="col-md-9 col-sm-8">
+				
+				<div class="product-view row">
+					<div class="left-content-product" th:each="comp:${cominfo}">
+				
+						<div class="content-product-left class-honizol col-md-5 col-sm-12 col-xs-12">
+							<div class="large-image  ">
+								<img itemprop="image" class="product-image-zoom" th:src="${comp.g_img}"  title="Chicken swinesha" alt="Chicken swinesha">
+							</div>
+							<div id="thumb-slider" class="yt-content-slider full_slider owl-drag" data-rtl="yes" data-autoplay="no" data-autoheight="no" data-delay="4" data-speed="0.6" data-margin="10" data-items_column00="4" data-items_column0="4" data-items_column1="3" data-items_column2="4"  data-items_column3="1" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-loop="no" data-hoverpause="yes">
+								<a data-index="0" class="img thumbnail " data-image="image/catalog/demo/product/fashion/1.jpg" title="Chicken swinesha">
+									<img th:src="${comp.g_img}" title="Chicken swinesha" alt="Chicken swinesha">
+								</a>
+							</div>
+						</div>
+						<div class="content-product-right col-md-7 col-sm-12 col-xs-12">
+							<div class="title-product">
+								<h1  th:text="${comp.g_name}"></h1>
+							</div>
+							<!-- Review ---->
+							<div class="box-review form-group">
+								<div class="ratings">
+									<div class="rating-box">
+										<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+										<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+										<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+										<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+										<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+									</div>
+								</div>
+								<a class="reviews_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">0 reviews</a>	| 
+								<a class="write_review_button" href="" onclick="$('a[href=\'#tab-review\']').trigger('click'); return false;">Write a review</a>
+							</div>
+							<div class="product-label form-group">
+								<div class="product_page_price price" itemprop="offerDetails" itemscope="" itemtype="http://data-vocabulary.org/Offer">
+									<span class="price-new" itemprop="price" th:text="${comp.g_price}"></span>
+									<span class="price-old" th:text="${comp.g_oriprice}"></span>
+								</div>
+
+							</div>
+
+							<div class="product-box-desc">
+								<div class="inner-box-desc">
+									<div class="brand"><span>品牌：</span><a href="#" th:text="${comp.t_type}"></a></div>
+                                    <div class="brand"><span>运行内存：</span><a href="#" th:text="${comp.g_neicun}"></a></div>
+                                    <div class="brand"><span>颜色：</span><a href="#" th:text="${comp.g_color}"></a></div>
+                                    <div class="brand"><span>上架时间：</span><a href="#" th:text="${comp.g_hiredate}"></a></div>
+                                    <div class="brand"><span>原价：</span><a href="#" th:text="${comp.g_oriprice}"></a></div>
+								</div>
+							</div>
+
+
+							<div id="product">
+								<h4>可用选项：</h4>
+								<div class="image_option_type form-group required">
+									<label class="control-label">颜色：</label>
+									<ul class="product-options clearfix"id="input-option231">
+										<li class="radio">
+											<label>
+												<input class="image_radio" type="radio" name="option[231]" value="33"> 
+												<img src="/image/demo/colors/blue.jpg" data-original-title="蓝色" class="img-thumbnail icon icon-color">				<i class="fa fa-check"></i>
+												<label> </label>
+											</label>
+										</li>
+										<li class="radio">
+											<label>
+												<input class="image_radio" type="radio" name="option[231]" value="34"> 
+												<img src="/image/demo/colors/brown.jpg" data-original-title="棕色" class="img-thumbnail icon icon-color">				<i class="fa fa-check"></i>
+												<label> </label>
+											</label>
+										</li>
+										<li class="radio">
+											<label>
+												<input class="image_radio" type="radio" name="option[231]" value="35"> <img src="/image/demo/colors/green.jpg"
+												data-original-title="绿色" class="img-thumbnail icon icon-color">				<i class="fa fa-check"></i>
+												<label> </label>
+											</label>
+										</li>
+										<li class="selected-option">
+										</li>
+									</ul>
+								</div>
+								
+                                <form th:action="@{/productadd/}+${comp.g_id}+'/'+${session.uid}">
+								<div class="form-group box-info-product">
+									<div class="option quantity">
+
+										<div class="input-group quantity-control" unselectable="on" style="-webkit-user-select: none;">
+											<label>数量</label>
+											<input class="form-control" type="text" name="nums"
+											value="1">
+											<input type="hidden"  value="50">
+											<span class="input-group-addon product_quantity_down">−</span>
+											<span class="input-group-addon product_quantity_up">+</span>
+										</div>
+									</div>
+									<div class="cart">
+                                        <ul>
+                                            <li th:if="${#strings.isEmpty(session.uname)}">
+                                                <a  th:href="@{/login}"><input  data-toggle="tooltip" title="" value="加入购物车" data-loading-text="Loading..." id="button-cart1" class="btn btn-mega btn-lg"  data-original-title="加入购物车">
+                                                </a>
+                                            </li>
+                                            <li th:if="${!#strings.isEmpty(session.uname)}">
+                                                <a  th:href="@{/productadd/}+${comp.g_id}"><input type="submit" data-toggle="tooltip" title="" value="加入购物车" data-loading-text="Loading..." id="button-cart" class="btn btn-mega btn-lg"  data-original-title="加入购物车">
+                                                </a>
+                                            </li>
+                                        </ul>
+
+
+                                    </div>
+									<div class="add-to-links wish_comp">
+										<ul class="blank list-inline">
+											<li class="wishlist">
+												<a class="icon" data-toggle="tooltip" title=""
+												onclick="wishlist.add('50');" data-original-title="Add to Wish List"><i class="fa fa-heart"></i>
+												</a>
+											</li>
+
+										</ul>
+									</div>
+
+								</div>
+                                </form>
+
+                            </div>
+							<!-- end box info product -->
+
+						</div>
+				
+					</div>
+				</div>
+				<!-- Product Tabs -->
+				<div class="producttab ">
+					<div class="tabsslider  vertical-tabs col-xs-12" th:each="comp:${cominfo}">
+						<ul class="nav nav-tabs col-lg-2 col-sm-3">
+							<li class="active"><a data-toggle="tab" href="#tab-1">描述</a></li>
+							<li class="item_nonactive"><a data-toggle="tab" href="#tab-review">回复</a></li>
+							<li class="item_nonactive"><a data-toggle="tab" href="#tab-4">标签</a></li>
+							<li class="item_nonactive"><a data-toggle="tab" href="#tab-5">自定义标签</a></li>
+						</ul>
+						<div class="tab-content col-lg-10 col-sm-9 col-xs-12">
+							<div id="tab-1" class="tab-pane fade active in">
+                                <span>商品名称：</span> <span th:text="${comp.g_name}"></span><br>
+                                <span>详情：</span><span th:text="${comp.g_xiangqing}"></span><br>
+                                <span>运行内存:</span><span th:text="${comp.g_neicun}"></span><br>
+                                <span>品牌：</span><span th:text="${comp.t_type}"></span><br>
+                                <span>颜色：</span><span th:text="${comp.g_color}"></span><br>
+                                <span>上架时间:</span><span th:text="${comp.g_hiredate}"></span><br>
+
+
+
+							</div>
+							<div id="tab-review" class="tab-pane fade">
+								<form>
+									<div id="review">
+										<table class="table table-striped table-bordered">
+											<tbody>
+												<tr>
+													<td style="width: 50%;"><strong>评论留言板</strong></td>
+													<td class="text-right" th:text="${time}"></td>
+												</tr>
+												<tr>
+													<td colspan="2">
+														<p>Best this product opencart</p>
+														<div class="ratings">
+															<div class="rating-box">
+																<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+																<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+																<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+																<span class="fa fa-stack"><i class="fa fa-star fa-stack-1x"></i><i class="fa fa-star-o fa-stack-1x"></i></span>
+																<span class="fa fa-stack"><i class="fa fa-star-o fa-stack-1x"></i></span>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+										<div class="text-right"></div>
+									</div>
+									<h2 id="review-title">写评论</h2>
+									<div class="contacts-form">
+										<div class="form-group"> <span class="icon icon-user"></span>
+											<input type="text" name="name" class="form-control" value="Your Name" onblur="if (this.value == '') {this.value = 'Your Name';}" onfocus="if(this.value == 'Your Name') {this.value = '';}"> 
+										</div>
+										<div class="form-group"> <span class="icon icon-bubbles-2"></span>
+											<textarea class="form-control" name="text" onblur="if (this.value == '') {this.value = 'Your Review';}" onfocus="if(this.value == 'Your Review') {this.value = '';}">Your Review</textarea>
+										</div> 
+										<span style="font-size: 11px;"><span class="text-danger">Note:</span>						HTML is not translated!</span>
+										
+										<div class="form-group">
+										 <b>Rating</b> <span>Bad</span>&nbsp;
+										<input type="radio" name="rating" value="1"> &nbsp;
+										<input type="radio" name="rating"
+										value="2"> &nbsp;
+										<input type="radio" name="rating"
+										value="3"> &nbsp;
+										<input type="radio" name="rating"
+										value="4"> &nbsp;
+										<input type="radio" name="rating"
+										value="5"> &nbsp;<span>Good</span>
+										
+										</div>
+										<div class="buttons clearfix"><a id="button-review" class="btn buttonGray">Continue</a></div>
+									</div>
+								</form>
+							</div>
+							<div id="tab-4" class="tab-pane fade">
+
+							</div>
+							<div id="tab-5" class="tab-pane fade">
+
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- //Product Tabs -->
+				<!-- Related Products -->
+    			<div class="related titleLine products-list grid module ">
+    				<h3 class="modtitle">Related Products  </h3>
+    				<div class="releate-products yt-content-slider products-list" data-rtl="no" data-loop="yes" data-autoplay="no" data-autoheight="no" data-autowidth="no" data-delay="4" data-speed="0.6" data-margin="30" data-items_column00="5" data-items_column0="5" data-items_column1="3" data-items_column2="3" data-items_column3="2" data-items_column4="1" data-arrows="yes" data-pagination="no" data-lazyload="yes" data-hoverpause="yes">
+    					<div class="item">         
+                            <div class="item-inner product-layout transition product-grid">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                        <div class="product-image-container second_img">
+                                            <a href="product.html" target="_self" title="Lastrami bacon">
+                                                <img src="image/catalog/demo/product/270/e1.jpg" class="img-1 img-responsive" alt="image1">
+                                                <img src="image/catalog/demo/product/270/e10.jpg" class="img-2 img-responsive" alt="image2">
+                                            </a>
+                                        </div>
+                                        <!--quickview--> 
+                                        <div class="so-quickview">
+                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>                                                     
+                                        <!--end quickview-->
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left">
+                                            <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                <span>Add to cart </span>   
+                                            </button>
+                                            <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="caption hide-cont">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 2 )</span>
+                                            </div>
+                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Lastrami bacon</a></h4>
+                                            
+                                        </div>
+                                        <p class="price">
+                                          <span class="price-new">$80.00</span>
+                                          
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>      
+                        </div>
+                        <div class="item">         
+                            <div class="item-inner product-layout transition product-grid">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                        <div class="box-label">
+                                            <span class="label-product label-sale">-15%</span>
+                                        </div>
+                                        <div class="product-image-container second_img">
+                                            <a href="product.html" target="_self" title="Exceeur sint occaecat">
+                                                <img src="image/catalog/demo/product/270/e2.jpg" class="img-1 img-responsive" alt="image1">
+                                                <img src="image/catalog/demo/product/270/e9.jpg" class="img-2 img-responsive" alt="image2">
+                                            </a>
+                                        </div>
+                                        <!--quickview--> 
+                                        <div class="so-quickview">
+                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>                                                     
+                                        <!--end quickview-->
+                                        
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left">
+                                            <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                <span>Add to cart </span>   
+                                            </button>
+                                            <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="caption hide-cont">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 3 )</span>
+                                            </div>
+                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Exceeur sint occaecat</a></h4>
+                                            
+                                        </div>
+                                        <p class="price">
+                                          <span class="price-new">$50.00</span>
+                                          <span class="price-old">$59.00</span>
+                                        </p>
+                                    </div>                                                
+                                </div>
+                            </div>      
+                        </div>
+                        <div class="item">         
+                            <div class="item-inner product-layout transition product-grid">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                        <div class="box-label">
+                                            <span class="label-product label-new">New</span>
+                                        </div>
+                                        <div class="product-image-container second_img">
+                                            <a href="product.html" target="_self" title="Duis aute irure ">
+                                                <img src="/image/catalog/demo/product/270/e4.jpg" class="img-1 img-responsive" alt="image1">
+                                                <img src="/image/catalog/demo/product/270/e7.jpg" class="img-2 img-responsive" alt="image2">
+                                            </a>
+                                        </div>
+                                        <!--quickview--> 
+                                        <div class="so-quickview">
+                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>                                                     
+                                        <!--end quickview-->
+
+                                        
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left">
+                                            <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                <span>Add to cart </span>   
+                                            </button>
+                                            <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="caption hide-cont">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 2 )</span>
+                                            </div>
+                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Duis aute irure </a></h4>
+                                            
+                                        </div>
+                                        <p class="price">
+                                          <span class="price-new">$48.00</span>
+                  
+                                        </p>
+                                    </div>                                        
+                                </div>
+                            </div>      
+                        </div>
+                        <div class="item">         
+                            <div class="item-inner product-layout transition product-grid">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                        
+                                        <div class="product-image-container second_img">
+                                            <a href="product.html" target="_self" title="Excepteur sint occ">
+                                                <img src="/image/catalog/demo/product/270/e5.jpg" class="img-1 img-responsive" alt="image1">
+                                                <img src="/image/catalog/demo/product/270/e6.jpg" class="img-2 img-responsive" alt="image2">
+                                            </a>
+                                        </div>
+                                        <!--quickview--> 
+                                        <div class="so-quickview">
+                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>                                                     
+                                        <!--end quickview-->
+
+                                        
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left">
+                                            <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                <span>Add to cart </span>   
+                                            </button>
+                                            <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="caption hide-cont">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 4 )</span>
+                                            </div>
+                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Excepteur sint occ</a></h4>
+                                            
+                                        </div>
+                                        <p class="price">
+                                          <span class="price-new">$90.00</span>
+                                
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>      
+                        </div>
+                        <div class="item">         
+                            <div class="item-inner product-layout transition product-grid">
+                                <div class="product-item-container">
+                                    <div class="left-block left-b">
+                                       
+                                        <div class="product-image-container second_img">
+                                            <a href="product.html" target="_self" title="PCenison meatloa">
+                                                <img src="/image/catalog/demo/product/270/e6.jpg" class="img-1 img-responsive" alt="image1">
+                                                <img src="/image/catalog/demo/product/270/e2.jpg" class="img-2 img-responsive" alt="image2">
+                                            </a>
+                                        </div>
+                                        <!--quickview--> 
+                                        <div class="so-quickview">
+                                          <a class="iframe-link btn-button quickview quickview_handler visible-lg" href="#" title="Quick view" data-fancybox-type="iframe"><i class="fa fa-eye"></i><span>Quick view</span></a>
+                                        </div>                                                     
+                                        <!--end quickview-->
+
+                                        
+                                    </div>
+                                    <div class="right-block">
+                                        <div class="button-group so-quickview cartinfo--left">
+                                            <button type="button" class="addToCart" title="Add to cart" onclick="cart.add('60 ');">
+                                                <span>Add to cart </span>   
+                                            </button>
+                                            <button type="button" class="wishlist btn-button" title="Add to Wish List" onclick="wishlist.add('60');"><i class="fa fa-heart-o"></i><span>Add to Wish List</span>
+                                            </button>
+                                            <button type="button" class="compare btn-button" title="Compare this Product " onclick="compare.add('60');"><i class="fa fa-retweet"></i><span>Compare this Product</span>
+                                            </button>
+                                            
+                                        </div>
+                                        <div class="caption hide-cont">
+                                            <div class="ratings">
+                                                <div class="rating-box">    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star fa-stack-2x"></i></span>
+                                                    <span class="fa fa-stack"><i class="fa fa-star-o fa-stack-2x"></i></span>
+                                                </div>
+                                                <span class="rating-num">( 6 )</span>
+                                            </div>
+                                            <h4><a href="product.html" title="Pastrami bacon" target="_self">Cenison meatloa</a></h4>
+                                            
+                                        </div>
+                                        <p class="price">$42.00</p>
+                                    </div>
+                                   
+                                </div>
+                            </div>      
+                        </div>
+    				</div>
+    			</div>
+    			<!-- end Related  Products-->
+			</div>
+			</div>
+			
+			
+		</div>
+		<!--Middle Part End-->
+	</div>
+	<!-- //Main Container -->
+	<!-- Footer Container -->
+    <footer class="footer-container typefooter-1">
+        <!-- Footer Top Container -->
+            <div class="container">
+                <div class="row footer-top">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="socials-w">
+                          <h2>Follow socials</h2>
+                          <ul class="socials">
+                            <li class="facebook"><a href="#" target="_blank"><i class="fa fa-facebook"></i><span>Facebook</span></a></li>
+                            <li class="twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
+                            <li class="google_plus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i><span>Google Plus</span></a></li>
+                            <li class="pinterest"><a href="#" target="_blank"><i class="fa fa-pinterest"></i><span>Pinterest</span></a></li>
+                            <li class="youtube"><a href="#" target="_blank"><i class="fa fa-youtube-play"></i><span>Youtube</span></a></li>
+                            <li class="linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin"></i><span>linkedin</span></a></li>
+                            <li class="skype"><a href="#" target="_blank"><i class="fa fa-skype"></i><span>skype</span></a></li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                        <div class="module newsletter-footer1">
+                            <div class="newsletter">
+
+                                <div class="title-block">
+                                    <div class="page-heading font-title">
+                                        Signup for Newsletter
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="block_content">
+                                    <form method="post" id="signup" name="signup" class="form-group form-inline signup send-mail">
+                                        <div class="form-group">
+                                            <div class="input-box">
+                                                <input type="email" placeholder="Your email address..." value="" class="form-control" id="txtemail" name="txtemail" size="55">
+                                            </div>
+                                            <div class="subcribe">
+                                                <button class="btn btn-primary btn-default font-title" type="submit" onclick="return subscribe_newsletter();" name="submit">
+                                            Subscribe
+                                        </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+
+                                </div>
+                                <!--/.modcontent-->
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+      
+        <!-- /Footer Top Container -->
+        
+        <div class="footer-middle ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-infos">
+                        <div class="infos-footer">
+                            <a href="#"><img src="/image/catalog/logo-footer.png" alt="image"></a>
+                            <ul class="menu">
+                                <li class="adres">
+                                    San Luis potosí, centro historico, 78000 san luis potosí, SPL, Mexico
+                                </li>
+                                <li class="phone">
+                                    (+0214)0 315 215 - (+0214)0 315 215
+                                </li>
+                                <li class="mail">
+                                    <a href="mailto:contact@opencartworks.com">contact@opencartworks.com</a>
+                                </li>
+                                <li class="time">
+                                    Open time: 8:00AM - 6:00PM
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-information box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Information</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="#">About Us</a></li>
+                                        <li><a href="#">FAQ</a></li>
+                                        <li><a href="#">Warranty And Services</a></li>
+                                        <li><a href="#">Support 24/7 page</a></li>
+                                        <li><a href="#">Product Registration</a></li>
+                                        <li><a href="#">Product Support</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-account box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">My Account</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="#">Brands</a></li>
+                                        <li><a href="#">Gift Certificates</a></li>
+                                        <li><a href="#">Affiliates</a></li>
+                                        <li><a href="#">Specials</a></li>
+                                        <li><a href="#">FAQs</a></li>
+                                        <li><a href="#">Custom Link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-clear">
+                        <div class="box-service box-footer">
+                          <div class="module clearfix">
+                            <h3 class="modtitle">Categories</h3>
+                            <div class="modcontent">
+                              <ul class="menu">
+                                <li><a href="#">Event & Party Supplies</a></li>
+                                <li><a href="#">Home Improvement</a></li>
+                                <li><a href="#">Lamps & Light Fixtures</a></li>
+                                <li><a href="#">Kitchen & Bath Fixtures</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Kitchen & Dining</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-service box-footer">
+                            <div class="module clearfix">
+                                <h3 class="modtitle">Services</h3>
+                                <div class="modcontent">
+                                    <ul class="menu">
+                                        <li><a href="#">Contact Us</a></li>
+                                        <li><a href="#">Returns</a></li>
+                                        <li><a href="#">Support</a></li>
+                                        <li><a href="#">Site Map</a></li>
+                                        <li><a href="#">Customer Service</a></li>
+                                        <li><a href="#">Custom Link</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-sm-4 col-xs-12 col-style">
+                        <div class="box-service box-footer">
+                          <div class="module clearfix">
+                            <h3 class="modtitle">Categories</h3>
+                            <div class="modcontent">
+                              <ul class="menu">
+                                <li><a href="#">Event & Party Supplies</a></li>
+                                <li><a href="#">Home Improvement</a></li>
+                                <li><a href="#">Lamps & Light Fixtures</a></li>
+                                <li><a href="#">Kitchen & Bath Fixtures</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                                <li><a href="#">Kitchen & Dining</a></li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                        <div class="footer-b">
+                            <div class="bottom-cont">
+                                <a href="#"><img src="/image/catalog/demo/payment/pay1.jpg" alt="image"></a>
+                                <ul class="footer-links">
+                                    <li><a href="#">关于我们</a></li>
+                                    <li><a href="#">Customer Service</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Site Map</a></li>
+                                    <li><a href="#">Orders and Returns</a></li>
+                                    <li><a href="#">联系我们</a></li>
+                                </ul>  
+                                <p>**$50 off orders $350+ with the code BOO50. $75 off orders $500+ with the code BOO75. $150 off orders $1000+ with the code BOO150. Valid from October 28, 2016 to October 31, 2016. Offer may not be combined with any other offers or promotions, is non-exchangeable and non-refundable. Offer valid within the US only.</p>
+                            </div>
+                        </div>
+            </div>
+        </div>
+        <!-- Footer Bottom Container -->
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="col-lg-12 col-xs-12 payment-w">
+                <img src="/image/catalog/demo/payment/payment.png" alt="imgpayment">
+                </div>
+            </div>
+            <div class="copyright-w">
+                <div class="container">
+                    <div class="copyright">
+                    Copyright &copy; 2018.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <!-- /Footer Bottom Container -->
+        
+        
+            <!--Back To Top-->
+        <div class="back-to-top"><i class="fa fa-angle-up"></i></div>
+    </footer>
+    <!-- //end Footer Container -->
+
+    </div>
+
+<!-- Include Libs & Plugins
+	============================================ -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/js/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="/js/slick-slider/slick.js"></script>
+	<script type="text/javascript" src="/js/themejs/libs.js"></script>
+	<script type="text/javascript" src="/js/unveil/jquery.unveil.js"></script>
+	<script type="text/javascript" src="/js/countdown/jquery.countdown.min.js"></script>
+	<script type="text/javascript" src="/js/dcjqaccordion/jquery.dcjqaccordion.2.8.min.js"></script>
+	<script type="text/javascript" src="/js/datetimepicker/moment.js"></script>
+	<script type="text/javascript" src="/js/datetimepicker/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript" src="/js/jquery-ui/jquery-ui.min.js"></script>
+	
+	
+	<!-- Theme files
+	============================================ -->
+	<script type="text/javascript" src="/js/themejs/homepage.js"></script>
+	
+	<script type="text/javascript" src="/js/themejs/so_megamenu.js"></script>
+	<script type="text/javascript" src="/js/themejs/addtocart.js"></script>
+	<script type="text/javascript" src="/js/themejs/application.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#button-cart").onclick.alert("添加成功！！");
+        })
+
+
+    </script>
+<!-- 		 -->
+	
+</body>
+</html>
+

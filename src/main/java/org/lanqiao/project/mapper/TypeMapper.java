@@ -2,11 +2,8 @@ package org.lanqiao.project.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 import org.lanqiao.project.pojo.Condition;
-import org.lanqiao.project.pojo.Rate;
 import org.lanqiao.project.pojo.Type;
-import org.lanqiao.project.pojo.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

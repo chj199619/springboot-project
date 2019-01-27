@@ -3,7 +3,6 @@ package org.lanqiao.project.controller;
 import com.alibaba.fastjson.JSON;
 import org.lanqiao.project.pojo.Condition;
 import org.lanqiao.project.pojo.Rate;
-import org.lanqiao.project.pojo.User;
 import org.lanqiao.project.service.RateadminService;
 import org.lanqiao.project.utils.PageModel;
 import org.springframework.beans.factory.annotation.Autowired;
