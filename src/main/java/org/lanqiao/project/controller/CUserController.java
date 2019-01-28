@@ -144,7 +144,7 @@ public String getUserList(HttpServletRequest request,Model model){
     @RequestMapping("welcome.html")
     public String welcome(HttpSession session,HttpServletRequest request,Model model){
         String username=session.getAttribute("username").toString();
-//        System.out.println(username+"11111111111111111111111111111111");
+//      System.out.println(username+"11111111111111111111111111111111");
         model.addAttribute("manager",username);
         Date date=new Date();
         SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm");
